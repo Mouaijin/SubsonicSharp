@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SubsonicSharp
 {
-    public class Class1
+    public class SubsonicClient
     {
     }
 }
