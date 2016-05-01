@@ -243,3 +243,6 @@ ModelManifest.xml
 
 # FAKE - F# Make
 .fake/
+
+#Exception for Crypto library needed for MD5
+!xBrainLab.Security.Cryptography.dll
