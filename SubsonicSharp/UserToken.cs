@@ -7,7 +7,7 @@ using xBrainLab.Security.Cryptography;
 
 namespace SubsonicSharp
 {
-    class UserToken
+    public class UserToken
     {
         public string Username { get; set; }
         public bool Plaintext { get; set; }

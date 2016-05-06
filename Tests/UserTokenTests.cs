@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SubsonicSharp;
 
 namespace Tests
@@ -20,7 +19,7 @@ namespace Tests
         {
             UserToken test = new UserToken("test", "password", true);
             string testString = test.ToString();
-            string expected = "u=test&p=password";
+            const string expected = "u=test&p=password";
             Assert.AreEqual(expected, testString);
         }
 
@@ -35,7 +34,7 @@ namespace Tests
             test.UpdatePassword("password");
 
             string testString = test.ToString();
-            string expected = "u=test&t=9d8d1f345f220fec61ae3ff604416ff6&s=abcdef";
+            const string expected = "u=test&t=9d8d1f345f220fec61ae3ff604416ff6&s=abcdef";
             Assert.AreEqual(expected, testString);
         }
     }
