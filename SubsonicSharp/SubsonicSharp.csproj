@@ -35,6 +35,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="BasicItem.cs" />
+    <Compile Include="RestCommand.cs" />
+    <Compile Include="RestParameter.cs" />
     <Compile Include="ServerInfo.cs" />
     <Compile Include="SubsonicClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

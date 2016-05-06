@@ -18,7 +18,7 @@ namespace SubsonicSharp
             Port = port;
         }
 
-        public string BaseUrl() => $"http://{Address}:{Port}/";
+        public string BaseUrl() => $"http://{Address}:{Port}";
 
         public string VersionString() => $"v=1.{ApiVersion}";
     }
