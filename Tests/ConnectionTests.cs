@@ -33,14 +33,13 @@ namespace Tests
             string expected = "http://192.168.1.140:4040/rest/ping?u=test&p=test&v=1.13&c=SubSharp";
             string actual = Client.FormatCommand(pingCommand);
             Assert.AreEqual(expected,actual);
-            //Stream response = Client.GetResponseStream(pingCommand);
-            //XmlReader reader = XmlReader.Create(response);
-            //string res = "";
-            //while (reader.Read())
-            //{
-            //    res += reader.LocalName + reader.Value;
-            //}
-            //Debug.WriteLine(res);
+        }
+
+        [TestMethod]
+        public void PingTest()
+        {
+            bool response = Client.PingServer();
+            Assert.AreEqual(true, response);
         }
     }
 }

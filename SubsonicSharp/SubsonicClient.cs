@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace SubsonicSharp
 {
@@ -57,10 +58,17 @@ namespace SubsonicSharp
 
 
         //Return true on successful ping
-        //public bool PingServer()
-        //{
-            
-        //}
+        public bool PingServer()
+        {
+            RestCommand ping = new RestCommand {MethodName = "ping"};
+            using (Stream response = GetResponseStream(ping))
+            {
+                XmlReader reader = XmlReader.Create(response);
+                reader.ReadToFollowing("subsonic-response");
+                string status = reader.GetAttribute("status");
+                return status.Equals("ok");
+            }
+        }
 
     }
 }
