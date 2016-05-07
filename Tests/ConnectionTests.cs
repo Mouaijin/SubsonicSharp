@@ -7,6 +7,7 @@ using System.IO;
 using System.Xml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SubsonicSharp;
+using SubsonicSharp.SubTypes;
 
 namespace Tests
 {
@@ -40,6 +41,17 @@ namespace Tests
         {
             bool response = Client.PingServer();
             Assert.AreEqual(true, response);
+        }
+
+        [TestMethod]
+        public void LicenseTest()
+        {
+            License license = Client.GetLicense();
+            Assert.AreEqual(true, license.Valid);
+            Assert.AreEqual("foo@bar.com", license.Email);
+            //DateTime seems to be returned in UTC format- DateTime.Parse should be okay with this
+            DateTime expected = new DateTime(2016,4,12,1,9,30, 679);
+            Assert.AreEqual(expected, license.Expires);
         }
     }
 }

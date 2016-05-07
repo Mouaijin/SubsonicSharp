@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using SubsonicSharp.SubTypes;
 
 namespace SubsonicSharp
 {
@@ -67,6 +68,20 @@ namespace SubsonicSharp
                 reader.ReadToFollowing("subsonic-response");
                 string status = reader.GetAttribute("status");
                 return status.Equals("ok");
+            }
+        }
+
+        public License GetLicense()
+        {
+            RestCommand licenseCommand = new RestCommand {MethodName = "getLicense"};
+            using (Stream response = GetResponseStream(licenseCommand))
+            {
+                XmlReader reader = XmlReader.Create(response);
+                reader.ReadToFollowing("license");
+                string valid = reader.GetAttribute("valid");
+                string email = reader.GetAttribute("email");
+                string expires = reader.GetAttribute(2);
+                return new License(valid, email, expires);
             }
         }
 
