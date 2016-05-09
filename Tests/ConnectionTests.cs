@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Net;
-using System.IO;
-using System.Xml;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SubsonicSharp;
 using SubsonicSharp.SubTypes;
@@ -14,7 +8,7 @@ namespace Tests
     [TestClass]
     public class ConnectionTests
     {
-        public SubsonicClient Client { get; set; }
+        public SubsonicClient Client { get; }
         public ConnectionTests()
         {
             UserToken user = new UserToken("test", "test", true);
@@ -50,7 +44,7 @@ namespace Tests
             Assert.AreEqual(true, license.Valid);
             Assert.AreEqual("foo@bar.com", license.Email);
             //DateTime seems to be returned in UTC format- DateTime.Parse should be okay with this
-            DateTime expected = new DateTime(2016,4,12,1,9,30, 679);
+            DateTime expected = new DateTime(2016, 4, 12, 1, 9, 30, 679);
             Assert.AreEqual(expected, license.Expires);
         }
     }

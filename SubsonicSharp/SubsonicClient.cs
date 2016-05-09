@@ -1,21 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using System.Xml.Linq;
 using SubsonicSharp.SubTypes;
 
 namespace SubsonicSharp
 {
     public class SubsonicClient
     {
-        public UserToken User { get; set; }
-        public ServerInfo Server { get; set; }
-        public string ClientName { get; set; } = "SubSharp"; //Required field for requests, 
+        public UserToken User { get; }
+        public ServerInfo Server { get; }
+        public string ClientName { get; } = "SubSharp"; //Required field for requests
 
         public SubsonicClient(string username, string password, string address, int port = 4040)
         {
@@ -31,7 +31,8 @@ namespace SubsonicSharp
 
         public string FormatCommand(RestCommand command)
         {
-            return $"{Server.BaseUrl()}/rest/{command.MethodName}?{command.ParameterString()}{User}&{Server.VersionString()}&c={ClientName}";
+            return
+                $"{Server.BaseUrl()}/rest/{command.MethodName}?{command.ParameterString()}{User}&{Server.VersionString()}&c={ClientName}";
         }
 
         private async Task<string> GetResponseTask(RestCommand command)
@@ -46,44 +47,46 @@ namespace SubsonicSharp
             }
         }
 
-        public Stream GetResponseStream(RestCommand command)
+        public XDocument GetResponseXDocument(RestCommand command)
         {
             string text = GetResponseTask(command).Result;
-            MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
-            writer.Write(text);
-            writer.Flush();
-            stream.Position = 0;
-            return stream;
+            return XDocument.Parse(text);
         }
 
-
+        #region System
         //Return true on successful ping
         public bool PingServer()
         {
-            RestCommand ping = new RestCommand {MethodName = "ping"};
-            using (Stream response = GetResponseStream(ping))
-            {
-                XmlReader reader = XmlReader.Create(response);
-                reader.ReadToFollowing("subsonic-response");
-                string status = reader.GetAttribute("status");
-                return status.Equals("ok");
-            }
+            RestCommand ping = new RestCommand { MethodName = "ping" };
+            XDocument document = GetResponseXDocument(ping);
+            Debug.WriteLine(document.Root.Attribute("status").Value);
+            return document.Root.Attribute("status").Value.Equals("ok");
         }
 
         public License GetLicense()
         {
-            RestCommand licenseCommand = new RestCommand {MethodName = "getLicense"};
-            using (Stream response = GetResponseStream(licenseCommand))
+            RestCommand licenseCommand = new RestCommand { MethodName = "getLicense" };
+            XDocument document = GetResponseXDocument(licenseCommand);
+            XElement licenseElement = document.Root.Descendants().First();
+            var atts = licenseElement.Attributes();
+            foreach (XAttribute att in atts)
             {
-                XmlReader reader = XmlReader.Create(response);
-                reader.ReadToFollowing("license");
-                string valid = reader.GetAttribute("valid");
-                string email = reader.GetAttribute("email");
-                string expires = reader.GetAttribute(2);
-                return new License(valid, email, expires);
+                Debug.WriteLine(att);
             }
+            string valid = licenseElement.Attribute("valid").Value;
+            string email = licenseElement.Attribute("email").Value;
+            string expires = licenseElement.LastAttribute.Value; //Accessed without name because it varies between "licenseExpires" and "trialExpires"
+            return new License(valid, email, expires);
         }
+        #endregion System
 
+        #region Browsing
+
+        //public IEnumerable<BasicItem> GetMusicFolders()
+        //{
+        //    RestCommand command = new RestCommand { MethodName = "getMusicFolders" };
+        //    XmlReader
+        //}
+        #endregion Browsing
     }
 }

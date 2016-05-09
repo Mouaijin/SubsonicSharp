@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SubsonicSharp
+﻿namespace SubsonicSharp
 {
     class BasicItem
     {
@@ -19,6 +13,7 @@ namespace SubsonicSharp
         Song,
         Album,
         Directory,
-        Playlist
+        Playlist,
+        MusicFolder
     }
 }
