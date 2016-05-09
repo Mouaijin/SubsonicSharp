@@ -59,7 +59,6 @@ namespace SubsonicSharp
         {
             RestCommand ping = new RestCommand { MethodName = "ping" };
             XDocument document = GetResponseXDocument(ping);
-            Debug.WriteLine(document.Root.Attribute("status").Value);
             return document.Root.Attribute("status").Value.Equals("ok");
         }
 
@@ -68,11 +67,6 @@ namespace SubsonicSharp
             RestCommand licenseCommand = new RestCommand { MethodName = "getLicense" };
             XDocument document = GetResponseXDocument(licenseCommand);
             XElement licenseElement = document.Root.Descendants().First();
-            var atts = licenseElement.Attributes();
-            foreach (XAttribute att in atts)
-            {
-                Debug.WriteLine(att);
-            }
             string valid = licenseElement.Attribute("valid").Value;
             string email = licenseElement.Attribute("email").Value;
             string expires = licenseElement.LastAttribute.Value; //Accessed without name because it varies between "licenseExpires" and "trialExpires"
@@ -82,11 +76,24 @@ namespace SubsonicSharp
 
         #region Browsing
 
-        //public IEnumerable<BasicItem> GetMusicFolders()
-        //{
-        //    RestCommand command = new RestCommand { MethodName = "getMusicFolders" };
-        //    XmlReader
-        //}
+        public IEnumerable<BasicItem> GetMusicFolders()
+        {
+            RestCommand command = new RestCommand { MethodName = "getMusicFolders" };
+            XDocument document = GetResponseXDocument(command);
+            XElement parentElement = document.Root.Descendants().First();
+            foreach (XElement element in parentElement.Descendants())
+            {
+                Debug.WriteLine(element.Attribute("id").Value);
+                Debug.WriteLine(element.Attribute("name").Value);
+                yield return
+                    new BasicItem
+                    {
+                        Id = int.Parse(element.Attribute("id").Value),
+                        Kind = ItemType.MusicFolder,
+                        Name = element.Attribute("name").Value
+                    };
+            }
+        }
         #endregion Browsing
     }
 }
