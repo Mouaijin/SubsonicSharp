@@ -10,7 +10,7 @@ namespace Tests
     [TestClass]
     public class BrowsingTests
     {
-        public SubsonicClient Client { get; set; }
+        public SubsonicClient Client { get; }
         public BrowsingTests()
         {
             UserToken user = new UserToken("test", "test", true);

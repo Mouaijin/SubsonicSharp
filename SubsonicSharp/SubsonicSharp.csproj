@@ -40,7 +40,17 @@
     <Compile Include="ServerInfo.cs" />
     <Compile Include="SubsonicClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SubTypes\Album.cs" />
+    <Compile Include="SubTypes\Artist.cs" />
+    <Compile Include="SubTypes\Child.cs" />
+    <Compile Include="SubTypes\Genre.cs" />
     <Compile Include="SubTypes\License.cs" />
+    <Compile Include="SubTypes\NowPlaying.cs" />
+    <Compile Include="SubTypes\Playlist.cs" />
+    <Compile Include="SubTypes\PlayQueue.cs" />
+    <Compile Include="SubTypes\SearchResult.cs" />
+    <Compile Include="SubTypes\Song.cs" />
+    <Compile Include="SubTypes\Video.cs" />
     <Compile Include="UserToken.cs" />
   </ItemGroup>
   <ItemGroup>
