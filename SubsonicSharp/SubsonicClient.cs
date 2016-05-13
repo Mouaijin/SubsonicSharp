@@ -58,20 +58,20 @@ namespace SubsonicSharp
         //Return true on successful ping
         public bool PingServer()
         {
-            RestCommand ping = new RestCommand {MethodName = "ping"};
+            RestCommand ping = new RestCommand { MethodName = "ping" };
             XDocument document = GetResponseXDocument(ping);
             return document.Root.Attribute("status").Value.Equals("ok");
         }
 
         public License GetLicense()
         {
-            RestCommand licenseCommand = new RestCommand {MethodName = "getLicense"};
+            RestCommand licenseCommand = new RestCommand { MethodName = "getLicense" };
             XDocument document = GetResponseXDocument(licenseCommand);
             XElement licenseElement = document.Root.Descendants().First();
             string valid = licenseElement.Attribute("valid").Value;
             string email = licenseElement.Attribute("email").Value;
             string expires = licenseElement.LastAttribute.Value;
-                //Accessed without name because it varies between "licenseExpires" and "trialExpires"
+            //Accessed without name because it varies between "licenseExpires" and "trialExpires"
             return new License(valid, email, expires);
         }
 
@@ -81,7 +81,7 @@ namespace SubsonicSharp
 
         public IEnumerable<BasicItem> GetMusicFolders()
         {
-            RestCommand command = new RestCommand {MethodName = "getMusicFolders"};
+            RestCommand command = new RestCommand { MethodName = "getMusicFolders" };
             XDocument document = GetResponseXDocument(command);
             XElement parentElement = document.Root.Descendants().First();
             foreach (XElement element in parentElement.Descendants())
@@ -97,6 +97,9 @@ namespace SubsonicSharp
                     };
             }
         }
+
+        #region GetIndexes
+        #endregion GetIndexes
 
         #endregion Browsing
     }

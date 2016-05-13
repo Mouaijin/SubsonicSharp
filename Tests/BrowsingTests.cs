@@ -24,7 +24,8 @@ namespace Tests
             List<BasicItem> expectedFolders = new List<BasicItem>
             {
                 new BasicItem {Id = 0, Kind = ItemType.MusicFolder, Name = "Music"},
-                new BasicItem {Id = 1, Kind = ItemType.MusicFolder, Name = "Mom's Music"}
+                new BasicItem {Id = 1, Kind = ItemType.MusicFolder, Name = "Mom's Music"},
+                new BasicItem {Id = 2, Kind = ItemType.MusicFolder, Name = "Styer Music"}
             };
             int count =0;
             foreach (BasicItem item in folders)
@@ -32,7 +33,7 @@ namespace Tests
                 count++;
                 Assert.IsTrue(expectedFolders.Contains(item));
             }
-            Assert.AreEqual(2, count);
+            Assert.AreEqual(3, count);
         }
     }
 }

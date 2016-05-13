@@ -8,10 +8,10 @@ namespace SubsonicSharp.SubTypes
 {
     class Artist : BasicItem
     {
-        public DateTime Starred { get; set; }
-        public int UserRating { get; set; }
-        public int AverageRating { get; set; }
-        public int AlbumCount { get; set; }
-        public string CoverArt { get; set; }
+        public DateTime? Starred { get; set; } = null;
+        public int? UserRating { get; set; } = null;
+        public int? AverageRating { get; set; } = null;
+        public int? AlbumCount { get; set; } = null;
+        public string CoverArt { get; set; } = null;
     }
 }

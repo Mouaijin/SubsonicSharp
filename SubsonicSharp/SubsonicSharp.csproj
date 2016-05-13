@@ -44,6 +44,7 @@
     <Compile Include="SubTypes\Artist.cs" />
     <Compile Include="SubTypes\Child.cs" />
     <Compile Include="SubTypes\Genre.cs" />
+    <Compile Include="SubTypes\IndexesCollection.cs" />
     <Compile Include="SubTypes\License.cs" />
     <Compile Include="SubTypes\NowPlaying.cs" />
     <Compile Include="SubTypes\Playlist.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="SubTypes\Song.cs" />
     <Compile Include="SubTypes\Video.cs" />
     <Compile Include="UserToken.cs" />
+    <Compile Include="ExtensionMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="xBrainLab.Security.Cryptography">

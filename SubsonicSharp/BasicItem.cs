@@ -39,11 +39,9 @@ namespace SubsonicSharp
             try
             {
                 BasicItem comp = (BasicItem) obj;
-                if (Kind != comp.Kind)
-                    return false;
-                if (Id != comp.Id)
-                    return false;
-                return Name.Equals(comp.Name);
+                return Kind == comp.Kind 
+                    && Id == comp.Id 
+                    && Name.Equals(comp.Name);
             }
             catch (Exception)
             {
@@ -59,6 +57,10 @@ namespace SubsonicSharp
         Album,
         Directory,
         Playlist,
-        MusicFolder
+        MusicFolder,
+        Shortcut,
+        Podcast,
+        Audiobook,
+        Video
     }
 }
