@@ -99,6 +99,14 @@ namespace SubsonicSharp
         }
 
         #region GetIndexes
+
+        public IndexesCollection GetIndexes()
+        {
+            RestCommand command = new RestCommand {MethodName = "getIndexes"};
+            XDocument document = GetResponseXDocument(command);
+            IndexesCollection collection = IndexesCollection.Create(document);
+            return collection;
+        }
         #endregion GetIndexes
 
         #endregion Browsing

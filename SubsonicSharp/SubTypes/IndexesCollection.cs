@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 
 namespace SubsonicSharp.SubTypes
 {
-    class IndexesCollection
+    public class IndexesCollection
     {
+
         public string IgnoredArticles { get; set; }
         public long LastModified { get; set; }
         public IEnumerable<BasicItem> Shortcuts { get; private set; }
@@ -38,25 +38,27 @@ namespace SubsonicSharp.SubTypes
 
         private static XElement GetIndexesElement(XDocument xml)
         {
-            return xml.Root?.Descendants("indexes").Single();
+            return xml.Root?.Elements().First();
         }
 
         private static IEnumerable<BasicItem> ReadShortcuts(XElement xml)
         {
-            foreach (XElement shortcut in xml.Descendants("shortcut"))
+            foreach (XElement shortcut in xml.Elements().Where(x => x.Name.LocalName == "shortcut"))
             {
-                yield return new BasicItem
-                {
-                    Id = Convert.ToInt32(shortcut.Attribute("id").Value),
-                    Name = shortcut.Attribute("name").Value,
-                    Kind = ItemType.Shortcut
-                };
+
+                    yield return new BasicItem
+                    {
+                        Id = Convert.ToInt32(shortcut.Attribute("id").Value),
+                        Name = shortcut.Attribute("name").Value,
+                        Kind = ItemType.Shortcut
+                    };
             }
         }
+        
 
         private static IEnumerable<Child> ReadChildren(XElement xml)
         {
-            foreach (XElement child in xml.Descendants("child"))
+            foreach (XElement child in xml.Elements().Where(x => x.Name.LocalName == "child"))
             {
                 yield return Child.Create(child);
             }
@@ -64,7 +66,45 @@ namespace SubsonicSharp.SubTypes
 
         private static Dictionary<string, IEnumerable<Artist>> ReadIndexes(XElement xml)
         {
-            throw new NotImplementedException();
+            Dictionary<string, IEnumerable<Artist>> dict = new Dictionary<string, IEnumerable<Artist>>();
+            foreach (XElement element in xml.Elements().Where(x => x.Name.LocalName == "index"))
+            {
+                string key = element.Attribute("name").Value;
+                IEnumerable<Artist> value = EnumerateIndexChildren(element);
+                dict.Add(key, value);
+            }
+            return dict;
+        }
+
+        private static IEnumerable<Artist> EnumerateIndexChildren(XElement xml)
+        {
+            foreach (XElement element in xml.Elements().Where(x => x.Name.LocalName == "artist"))
+            {
+                Artist artist = new Artist();
+                foreach (XAttribute attribute in element.Attributes())
+                {
+                    string name = attribute.Name.LocalName;
+                    switch (name.ToLower())
+                    {
+                        case "id":
+                            artist.Id = Convert.ToInt32(attribute.Value);
+                            break;
+                        case "name":
+                            artist.Name = attribute.Value;
+                            break;
+                        case "starred":
+                            artist.Starred = DateTime.Parse(attribute.Value);
+                            break;
+                        case "userrating":
+                            artist.UserRating = Convert.ToInt32(attribute.Value);
+                            break;
+                        case "averagerating":
+                            artist.AverageRating = Convert.ToInt32(attribute.Value);
+                            break;
+                    }
+                }
+                yield return artist;
+            }
         }
 
         private static IEnumerable<string> GetIndexNames(Dictionary<string, IEnumerable<Artist>> dict)

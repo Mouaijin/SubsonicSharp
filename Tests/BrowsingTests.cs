@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Xml.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SubsonicSharp;
+using SubsonicSharp.SubTypes;
 
 namespace Tests
 {
@@ -34,6 +34,18 @@ namespace Tests
                 Assert.IsTrue(expectedFolders.Contains(item));
             }
             Assert.AreEqual(3, count);
+        }
+
+        [TestMethod]
+        public void GetIndexesTest()
+        {
+            XDocument xDoc = XDocument.Load("TestData/indexes_example_1.xml");
+            IndexesCollection collection = IndexesCollection.Create(xDoc);
+            Assert.AreEqual(2, collection.Shortcuts.Count(), "Bad shorcuts count");
+            Assert.AreEqual(2, collection.Indexes.Keys.Count, "Bad dictionary key count");
+            Assert.AreEqual("Bob Dylan", collection.Indexes["B"].Single().Name, "Bob Dylan as only artist in 'B' failed");
+            Assert.AreEqual(2, collection.Children.Count());
+            Assert.IsTrue(collection.Children.Count(x => x.Id == 111) == 1);
         }
     }
 }
