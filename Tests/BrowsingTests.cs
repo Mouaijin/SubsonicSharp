@@ -47,5 +47,25 @@ namespace Tests
             Assert.AreEqual(2, collection.Children.Count());
             Assert.IsTrue(collection.Children.Count(x => x.Id == 111) == 1);
         }
+
+        [TestMethod]
+        public void GetMusicDirectoryTest()
+        {
+            XDocument xDoc = XDocument.Load("TestData/directory_example_2.xml");
+            Directory dir = Directory.Create(xDoc);
+            Assert.AreEqual(2, dir.Children.Count());
+            Assert.AreEqual(11, dir.Id);
+            Assert.AreEqual("Arrival", dir.Name);
+            Assert.AreEqual(1, dir.Parent);
+        }
+
+        [TestMethod]
+        public void GetGenresTest()
+        {
+            XDocument xDoc = XDocument.Load("TestData/genres_example_1.xml");
+            IEnumerable<Genre> genres = xDoc.Elements().Where(x => x.Name.LocalName == "genre").Select(y => Genre.Create(y));
+            Assert.AreEqual(7, genres.Count());
+            Assert.IsTrue(genres.ElementAt(0).Name.Equals("Electronic"));
+        }
     }
 }

@@ -36,10 +36,7 @@ namespace SubsonicSharp.SubTypes
             };
         }
 
-        private static XElement GetIndexesElement(XDocument xml)
-        {
-            return xml.Root?.Elements().First();
-        }
+        private static XElement GetIndexesElement(XDocument xml) => xml.Root?.Elements().First();
 
         private static IEnumerable<BasicItem> ReadShortcuts(XElement xml)
         {
@@ -58,10 +55,7 @@ namespace SubsonicSharp.SubTypes
 
         private static IEnumerable<Child> ReadChildren(XElement xml)
         {
-            foreach (XElement child in xml.Elements().Where(x => x.Name.LocalName == "child"))
-            {
-                yield return Child.Create(child);
-            }
+            return xml.Elements().Where(x => x.Name.LocalName == "child").Select(Child.Create);
         }
 
         private static Dictionary<string, IEnumerable<Artist>> ReadIndexes(XElement xml)

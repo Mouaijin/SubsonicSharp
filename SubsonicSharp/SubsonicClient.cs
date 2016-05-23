@@ -98,8 +98,8 @@ namespace SubsonicSharp
             }
         }
 
-        #region GetIndexes
 
+        //todo: add support for parameters
         public IndexesCollection GetIndexes()
         {
             RestCommand command = new RestCommand {MethodName = "getIndexes"};
@@ -107,7 +107,28 @@ namespace SubsonicSharp
             IndexesCollection collection = IndexesCollection.Create(document);
             return collection;
         }
-        #endregion GetIndexes
+
+        public Directory GetMusicDirectory(int id)
+        {
+            RestCommand command = new RestCommand
+            {
+                MethodName = "getMusicDirectory",
+                Parameters = {new RestParameter {Parameter = "id", Value = id.ToString()}}
+            };
+            XDocument document = GetResponseXDocument(command);
+            Directory directory = Directory.Create(document);
+            return directory;
+        }
+
+        public IEnumerable<Genre> GetGenres()
+        {
+            RestCommand command = new RestCommand
+            {
+                MethodName = "getGenres"
+            };
+            XDocument document = GetResponseXDocument(command);
+            return document.Elements().Where(x => x.Name.LocalName == "genre").Select(Genre.Create);
+        }
 
         #endregion Browsing
     }
