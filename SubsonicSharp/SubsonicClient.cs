@@ -102,7 +102,7 @@ namespace SubsonicSharp
         //todo: add support for parameters
         public IndexesCollection GetIndexes()
         {
-            RestCommand command = new RestCommand {MethodName = "getIndexes"};
+            RestCommand command = new RestCommand { MethodName = "getIndexes" };
             XDocument document = GetResponseXDocument(command);
             IndexesCollection collection = IndexesCollection.Create(document);
             return collection;
@@ -113,7 +113,7 @@ namespace SubsonicSharp
             RestCommand command = new RestCommand
             {
                 MethodName = "getMusicDirectory",
-                Parameters = {new RestParameter {Parameter = "id", Value = id.ToString()}}
+                Parameters = { new RestParameter { Parameter = "id", Value = id.ToString() } }
             };
             XDocument document = GetResponseXDocument(command);
             Directory directory = Directory.Create(document);
@@ -127,7 +127,13 @@ namespace SubsonicSharp
                 MethodName = "getGenres"
             };
             XDocument document = GetResponseXDocument(command);
-            return document.Elements().Where(x => x.Name.LocalName == "genre").Select(Genre.Create);
+            return
+                document
+                    .Root
+                    .Elements()
+                    .First().Elements()
+                    .Where(x => x.Name.LocalName == "genre")
+                    .Select(Genre.Create);
         }
 
         #endregion Browsing

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -62,10 +63,9 @@ namespace Tests
         [TestMethod]
         public void GetGenresTest()
         {
-            XDocument xDoc = XDocument.Load("TestData/genres_example_1.xml");
-            IEnumerable<Genre> genres = xDoc.Elements().Where(x => x.Name.LocalName == "genre").Select(y => Genre.Create(y));
-            Assert.AreEqual(7, genres.Count());
-            Assert.IsTrue(genres.ElementAt(0).Name.Equals("Electronic"));
+            IEnumerable<Genre> genres = Client.GetGenres();
+            Assert.AreEqual("Electronic", genres.First().Name);
+            Assert.AreEqual(3798, genres.First().SongCount);
         }
     }
 }
