@@ -80,10 +80,13 @@ namespace SubsonicSharp
 
         #region Browsing
 
-        public IEnumerable<BasicItem> GetMusicFolders()
+        public IEnumerable<BasicItem> GetMusicFolders(XDocument document = null)
         {
-            RestCommand command = new RestCommand { MethodName = "getMusicFolders" };
-            XDocument document = GetResponseXDocument(command);
+            if (document == null)
+            {
+                RestCommand command = new RestCommand {MethodName = "getMusicFolders"};
+                document = GetResponseXDocument(command);
+            }
             XElement parentElement = document.Root.Descendants().First();
             foreach (XElement element in parentElement.Descendants())
             {
@@ -101,10 +104,13 @@ namespace SubsonicSharp
 
 
         //todo: add support for parameters
-        public IndexesCollection GetIndexes()
+        public IndexesCollection GetIndexes(XDocument document = null)
         {
-            RestCommand command = new RestCommand { MethodName = "getIndexes" };
-            XDocument document = GetResponseXDocument(command);
+            if (document == null)
+            {
+                RestCommand command = new RestCommand {MethodName = "getIndexes"};
+                document = GetResponseXDocument(command);
+            }
             IndexesCollection collection = IndexesCollection.Create(document);
             return collection;
         }
@@ -121,13 +127,19 @@ namespace SubsonicSharp
             return directory;
         }
 
-        public IEnumerable<Genre> GetGenres()
+        public Directory GetMusicDirectory(XDocument document) => Directory.Create(document);
+
+
+        public IEnumerable<Genre> GetGenres(XDocument document = null)
         {
-            RestCommand command = new RestCommand
+            if (document == null)
             {
-                MethodName = "getGenres"
-            };
-            XDocument document = GetResponseXDocument(command);
+                RestCommand command = new RestCommand
+                {
+                    MethodName = "getGenres"
+                };
+                document = GetResponseXDocument(command);
+            }
             return
                 document
                     .Root
@@ -138,13 +150,16 @@ namespace SubsonicSharp
         }
 
         //todo: add parameter support
-        public Dictionary<string, IEnumerable<Artist>> GetArtists()
+        public Dictionary<string, IEnumerable<Artist>> GetArtists(XDocument document = null)
         {
-            RestCommand command = new RestCommand
+            if (document == null)
             {
-                MethodName = "getArtists"
-            };
-            XDocument document = GetResponseXDocument(command);
+                RestCommand command = new RestCommand
+                {
+                    MethodName = "getArtists"
+                };
+                document = GetResponseXDocument(command);
+            }
             Dictionary<string, IEnumerable<Artist>> dict = new Dictionary<string, IEnumerable<Artist>>();
             foreach (XElement index in document.Root.Elements().First().Elements().Where(x => x.Name.LocalName == "index"))
             {
