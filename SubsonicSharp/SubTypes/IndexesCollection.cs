@@ -64,41 +64,10 @@ namespace SubsonicSharp.SubTypes
             foreach (XElement element in xml.Elements().Where(x => x.Name.LocalName == "index"))
             {
                 string key = element.Attribute("name").Value;
-                IEnumerable<Artist> value = EnumerateIndexChildren(element);
+                IEnumerable<Artist> value = element.EnumerateArtists();
                 dict.Add(key, value);
             }
             return dict;
-        }
-
-        private static IEnumerable<Artist> EnumerateIndexChildren(XElement xml)
-        {
-            foreach (XElement element in xml.Elements().Where(x => x.Name.LocalName == "artist"))
-            {
-                Artist artist = new Artist();
-                foreach (XAttribute attribute in element.Attributes())
-                {
-                    string name = attribute.Name.LocalName;
-                    switch (name.ToLower())
-                    {
-                        case "id":
-                            artist.Id = Convert.ToInt32(attribute.Value);
-                            break;
-                        case "name":
-                            artist.Name = attribute.Value;
-                            break;
-                        case "starred":
-                            artist.Starred = DateTime.Parse(attribute.Value);
-                            break;
-                        case "userrating":
-                            artist.UserRating = Convert.ToInt32(attribute.Value);
-                            break;
-                        case "averagerating":
-                            artist.AverageRating = Convert.ToInt32(attribute.Value);
-                            break;
-                    }
-                }
-                yield return artist;
-            }
         }
 
         private static IEnumerable<string> GetIndexNames(Dictionary<string, IEnumerable<Artist>> dict)

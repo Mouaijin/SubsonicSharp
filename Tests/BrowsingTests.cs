@@ -67,5 +67,18 @@ namespace Tests
             Assert.AreEqual("Electronic", genres.First().Name);
             Assert.AreEqual(3798, genres.First().SongCount);
         }
+
+        [TestMethod]
+        public void GetArtistsTest()
+        {
+            XDocument xDoc =XDocument.Load("TestData/artists_example_1.xml");
+            Dictionary<string, IEnumerable<Artist>> artists = new Dictionary<string, IEnumerable<Artist>>();
+            foreach (XElement index in xDoc.Root.Elements().First().Elements().Where(x => x.Name.LocalName == "index"))
+            {
+                artists.Add(index.Attribute("name").Value, index.EnumerateArtists());
+            }
+            Assert.AreEqual("A-Ha", artists["A"].First().Name);
+            Assert.AreEqual(2, artists["B"].Count());
+        }
     }
 }

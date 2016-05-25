@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -134,6 +135,22 @@ namespace SubsonicSharp
                     .First().Elements()
                     .Where(x => x.Name.LocalName == "genre")
                     .Select(Genre.Create);
+        }
+
+        //todo: add parameter support
+        public Dictionary<string, IEnumerable<Artist>> GetArtists()
+        {
+            RestCommand command = new RestCommand
+            {
+                MethodName = "getArtists"
+            };
+            XDocument document = GetResponseXDocument(command);
+            Dictionary<string, IEnumerable<Artist>> dict = new Dictionary<string, IEnumerable<Artist>>();
+            foreach (XElement index in document.Root.Elements().First().Elements().Where(x => x.Name.LocalName == "index"))
+            {
+                dict.Add(index.Attribute("name").Value, index.EnumerateArtists());
+            }
+            return dict;
         }
 
         #endregion Browsing
