@@ -79,7 +79,7 @@ namespace SubsonicSharp
         #endregion System
 
         #region Browsing
-
+        //todo: Make public counter parts that do the calls and pass in the Xdoc parameters, and make these calls internal
         public IEnumerable<BasicItem> GetMusicFolders(XDocument document = null)
         {
             if (document == null)

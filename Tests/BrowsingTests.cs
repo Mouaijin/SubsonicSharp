@@ -21,12 +21,13 @@ namespace Tests
         [TestMethod]
         public void GetMusicFoldersTest()
         {
-            IEnumerable<BasicItem> folders = Client.GetMusicFolders();
+            XDocument xDoc = XDocument.Load("TestData/musicFolders_example_1.xml");
+            IEnumerable<BasicItem> folders = Client.GetMusicFolders(xDoc);
             List<BasicItem> expectedFolders = new List<BasicItem>
             {
-                new BasicItem {Id = 0, Kind = ItemType.MusicFolder, Name = "Music"},
-                new BasicItem {Id = 1, Kind = ItemType.MusicFolder, Name = "Mom's Music"},
-                new BasicItem {Id = 2, Kind = ItemType.MusicFolder, Name = "Styer Music"}
+                new BasicItem {Id = 1, Kind = ItemType.MusicFolder, Name = "Music"},
+                new BasicItem {Id = 2, Kind = ItemType.MusicFolder, Name = "Movies"},
+                new BasicItem {Id = 3, Kind = ItemType.MusicFolder, Name = "Incoming"}
             };
             int count =0;
             foreach (BasicItem item in folders)
@@ -41,7 +42,7 @@ namespace Tests
         public void GetIndexesTest()
         {
             XDocument xDoc = XDocument.Load("TestData/indexes_example_1.xml");
-            IndexesCollection collection = IndexesCollection.Create(xDoc);
+            IndexesCollection collection = Client.GetIndexes(xDoc);
             Assert.AreEqual(2, collection.Shortcuts.Count(), "Bad shorcuts count");
             Assert.AreEqual(2, collection.Indexes.Keys.Count, "Bad dictionary key count");
             Assert.AreEqual("Bob Dylan", collection.Indexes["B"].Single().Name, "Bob Dylan as only artist in 'B' failed");
@@ -53,7 +54,7 @@ namespace Tests
         public void GetMusicDirectoryTest()
         {
             XDocument xDoc = XDocument.Load("TestData/directory_example_2.xml");
-            Directory dir = Directory.Create(xDoc);
+            Directory dir = Client.GetMusicDirectory(xDoc);
             Assert.AreEqual(2, dir.Children.Count());
             Assert.AreEqual(11, dir.Id);
             Assert.AreEqual("Arrival", dir.Name);
@@ -63,9 +64,11 @@ namespace Tests
         [TestMethod]
         public void GetGenresTest()
         {
-            IEnumerable<Genre> genres = Client.GetGenres();
+            XDocument xDoc = XDocument.Load("TestData/genres_example_1.xml");
+            IEnumerable<Genre> genres = Client.GetGenres(xDoc);
             Assert.AreEqual("Electronic", genres.First().Name);
-            Assert.AreEqual(3798, genres.First().SongCount);
+            Assert.AreEqual(28, genres.First().SongCount);
+            Assert.AreEqual(7, genres.Count());
         }
 
         [TestMethod]
