@@ -42,6 +42,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubTypes\Album.cs" />
     <Compile Include="SubTypes\Artist.cs" />
+    <Compile Include="SubTypes\ArtistInfo.cs" />
     <Compile Include="SubTypes\Child.cs" />
     <Compile Include="SubTypes\Directory.cs" />
     <Compile Include="SubTypes\Genre.cs" />

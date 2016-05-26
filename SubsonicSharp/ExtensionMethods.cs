@@ -37,6 +37,13 @@ namespace SubsonicSharp
             return ret;
         }
 
+        public static string DescendantValueOrNull(this XElement xml, string elementName)
+        {
+            return xml.Elements().Any(x => x.Name.LocalName == elementName) 
+                ? xml.Elements().First(x => x.Name.LocalName == elementName).Value 
+                : null;
+        }
+
         public static ItemType ToMediaType(this string str)
         {
             switch (str.ToLower())
@@ -54,7 +61,9 @@ namespace SubsonicSharp
 
         public static IEnumerable<Artist> EnumerateArtists(this XElement xml)
         {
-            return xml.Elements().Where(x => x.Name.LocalName == "artist").Select(Artist.Create);
+            return xml.Elements().Where(x => x.Name.LocalName == "artist"
+                                             || x.Name.LocalName == "similarArtist")
+                                 .Select(Artist.Create);
         }
 
         public static IEnumerable<Album> EnumerateAlbums(this XElement xml)
@@ -66,9 +75,9 @@ namespace SubsonicSharp
         {
             return
                 xml.Elements()
-                    .Where(x => x.Name.LocalName == "song" 
-                    || x.Name.LocalName == "child" 
-                    || x.Name.LocalName == "video")
+                    .Where(x => x.Name.LocalName == "song"
+                                || x.Name.LocalName == "child"
+                                || x.Name.LocalName == "video")
                     .Select(Child.Create);
         }
     }

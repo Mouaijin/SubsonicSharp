@@ -115,5 +115,27 @@ namespace Tests
             Assert.IsFalse(song.IsDirectory);
             Assert.IsFalse(song.IsVideo.Value);
         }
+
+        [TestMethod]
+        public void GetArtistInfoTest()
+        {
+            XDocument xDoc = XDocument.Load("TestData/artistInfo_example_1.xml");
+            ArtistInfo info = Client.GetArtistInfo(xDoc);
+            Assert.AreEqual("5182c1d9-c7d2-4dad-afa0-ccfeada921a8", info.MusicBrainzId);
+            Assert.AreEqual("http://www.last.fm/music/Black+Sabbath", info.LastFmUrl);
+            Assert.AreEqual(3, info.SimilarArtists.Count());
+            Assert.AreEqual("Accept", info.SimilarArtists.First().Name);
+        }
+
+        [TestMethod]
+        public void GetArtistInfo2Test()
+        {
+            XDocument xDoc = XDocument.Load("TestData/artistInfo2_example_1.xml");
+            ArtistInfo info = Client.GetArtistInfo(xDoc);
+            Assert.AreEqual("5182c1d9-c7d2-4dad-afa0-ccfeada921a8", info.MusicBrainzId);
+            Assert.AreEqual("http://www.last.fm/music/Black+Sabbath", info.LastFmUrl);
+            Assert.AreEqual(8, info.SimilarArtists.Count());
+            Assert.AreEqual("Guns N' Roses", info.SimilarArtists.Last().Name);
+        }
     }
 }

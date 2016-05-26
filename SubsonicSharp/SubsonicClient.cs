@@ -206,6 +206,40 @@ namespace SubsonicSharp
             return GetSong(document);
         }
 
+        public ArtistInfo GetArtistInfo(XDocument document) => ArtistInfo.Create(document.Root.Elements().First());
+
+        public ArtistInfo GetArtistInfo(int id, int count = 20, bool includeNotPresent = false)
+        {
+            RestCommand command = new RestCommand
+            {
+                MethodName = "getArtistInfo",
+                Parameters =
+                {
+                    new RestParameter {Parameter = "id", Value = id.ToString()},
+                    new RestParameter {Parameter = "count", Value = count.ToString()},
+                    new RestParameter {Parameter = "includeNotPresent", Value = includeNotPresent.ToString()}
+                }
+
+            };
+            XDocument document = GetResponseXDocument(command);
+            return GetArtistInfo(document);
+        }
+        public ArtistInfo GetArtistInfo2(int id, int count = 20, bool includeNotPresent = false)
+        {
+            RestCommand command = new RestCommand
+            {
+                MethodName = "getArtistInfo2",
+                Parameters =
+                {
+                    new RestParameter {Parameter = "id", Value = id.ToString()},
+                    new RestParameter {Parameter = "count", Value = count.ToString()},
+                    new RestParameter {Parameter = "includeNotPresent", Value = includeNotPresent.ToString()}
+                }
+
+            };
+            XDocument document = GetResponseXDocument(command);
+            return GetArtistInfo(document);
+        }
         #endregion Browsing
     }
 }

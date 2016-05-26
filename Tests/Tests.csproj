@@ -69,6 +69,12 @@
     <Content Include="TestData\album_example_1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="TestData\artistInfo2_example_1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="TestData\artistInfo_example_1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestData\artists_example_1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
