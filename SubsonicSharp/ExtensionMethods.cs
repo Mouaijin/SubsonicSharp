@@ -14,6 +14,20 @@ namespace SubsonicSharp
             return xml.Attributes().Any(attribute => attribute.Name.ToString().ToLower().Equals(lower));
         }
 
+        public static string AttributeValueOrNull(this XElement xml, string name)
+        {
+            return xml.HasAttribute(name) ? xml.Attribute(name).Value : null;
+        }
+
+        public static int? IntAttributeOrNull(this XElement xml, string name)
+        {
+            string val = xml.AttributeValueOrNull(name);
+            int? ret = null;
+            if (val != null)
+                ret = Convert.ToInt32(val);
+            return ret;
+        }
+
         public static ItemType ToMediaType(this string str)
         {
             switch (str.ToLower())
@@ -31,33 +45,12 @@ namespace SubsonicSharp
 
         public static IEnumerable<Artist> EnumerateArtists(this XElement xml)
         {
-            foreach (XElement element in xml.Elements().Where(x => x.Name.LocalName == "artist"))
-            {
-                Artist artist = new Artist();
-                foreach (XAttribute attribute in element.Attributes())
-                {
-                    string name = attribute.Name.LocalName;
-                    switch (name.ToLower())
-                    {
-                        case "id":
-                            artist.Id = Convert.ToInt32(attribute.Value);
-                            break;
-                        case "name":
-                            artist.Name = attribute.Value;
-                            break;
-                        case "starred":
-                            artist.Starred = DateTime.Parse(attribute.Value);
-                            break;
-                        case "userrating":
-                            artist.UserRating = Convert.ToInt32(attribute.Value);
-                            break;
-                        case "averagerating":
-                            artist.AverageRating = Convert.ToInt32(attribute.Value);
-                            break;
-                    }
-                }
-                yield return artist;
-            }
+            return xml.Elements().Where(x => x.Name.LocalName == "artist").Select(Artist.Create);
+        }
+
+        public static IEnumerable<Album> EnumerateAlbums(this XElement xml)
+        {
+            return xml.Elements().Where(x => x.Name.LocalName == "album").Select(Album.Create);
         }
     }
 }

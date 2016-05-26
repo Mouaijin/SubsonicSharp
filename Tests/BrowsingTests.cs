@@ -79,5 +79,18 @@ namespace Tests
             Assert.AreEqual("A-Ha", artists["A"].First().Name);
             Assert.AreEqual(2, artists["B"].Count());
         }
+
+        [TestMethod]
+        public void GetArtistTest()
+        {
+            XDocument xDoc = XDocument.Load("TestData/artist_example_1.xml");
+            Artist artist = Client.GetArtist(xDoc);
+            Assert.AreEqual(5432, artist.Id);
+            Assert.AreEqual("AC/DC", artist.Name);
+            Assert.AreEqual(15, artist.AlbumCount);
+            Assert.AreEqual(15, artist.Albums.Count());
+            Assert.AreEqual(11047, artist.Albums.First().Id);
+            Assert.AreEqual(11061, artist.Albums.Last().Id);
+        }
     }
 }

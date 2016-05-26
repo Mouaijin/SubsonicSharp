@@ -168,6 +168,19 @@ namespace SubsonicSharp
             return dict;
         }
 
+        public Artist GetArtist(XDocument document) => Artist.Create(document.Root.Elements().First());
+
+        public Artist GetArtist(int id)
+        {
+            RestCommand command = new RestCommand
+            {
+                MethodName = "getArtist",
+                Parameters = {new RestParameter { Parameter = "id", Value = id.ToString()} }
+            };
+            XDocument document = GetResponseXDocument(command);
+            return GetArtist(document);
+        }
+
         #endregion Browsing
     }
 }
