@@ -21,10 +21,19 @@ namespace SubsonicSharp
 
         public static int? IntAttributeOrNull(this XElement xml, string name)
         {
-            string val = xml.AttributeValueOrNull(name);
+            string str = xml.AttributeValueOrNull(name);
             int? ret = null;
-            if (val != null)
-                ret = Convert.ToInt32(val);
+            if (str != null)
+                ret = Convert.ToInt32(str);
+            return ret;
+        }
+
+        public static DateTime? DateTimeAttributeOrNull(this XElement xml, string name)
+        {
+            string str = xml.AttributeValueOrNull(name);
+            DateTime? ret = null;
+            if (str != null)
+                ret = DateTime.Parse(str);
             return ret;
         }
 
@@ -51,6 +60,16 @@ namespace SubsonicSharp
         public static IEnumerable<Album> EnumerateAlbums(this XElement xml)
         {
             return xml.Elements().Where(x => x.Name.LocalName == "album").Select(Album.Create);
+        }
+
+        public static IEnumerable<Child> EnumaerateSongs(this XElement xml)
+        {
+            return
+                xml.Elements()
+                    .Where(x => x.Name.LocalName == "song" 
+                    || x.Name.LocalName == "child" 
+                    || x.Name.LocalName == "video")
+                    .Select(Child.Create);
         }
     }
 }

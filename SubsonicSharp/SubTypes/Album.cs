@@ -17,6 +17,7 @@ namespace SubsonicSharp.SubTypes
         public int? ArtistId { get; set; } = null;
         public DateTime? Starred { get; set; } = null;
         public int? Year { get; set; } = null;
+        public IEnumerable<Child> Songs = null;
 
         public static Album Create(XElement xml)
         {
@@ -34,6 +35,7 @@ namespace SubsonicSharp.SubTypes
                 album.Starred = DateTime.Parse(xml.Attribute("starred").Value);
             if (xml.HasAttribute("year"))
                 album.Year = Convert.ToInt32(xml.Attribute("year"));
+            album.Songs = xml.EnumaerateSongs();
             return album;
         }
     }

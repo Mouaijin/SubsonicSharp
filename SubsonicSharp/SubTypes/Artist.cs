@@ -25,6 +25,7 @@ namespace SubsonicSharp.SubTypes
                 UserRating = xml.IntAttributeOrNull("userRating"),
                 AverageRating = xml.IntAttributeOrNull("averageRating"),
                 AlbumCount = xml.IntAttributeOrNull("albumCount"),
+                Starred = xml.DateTimeAttributeOrNull("starred"),
                 Albums = xml.EnumerateAlbums()
             };
         }

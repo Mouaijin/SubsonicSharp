@@ -181,6 +181,19 @@ namespace SubsonicSharp
             return GetArtist(document);
         }
 
+        public Album GetAlbum(XDocument document) => Album.Create(document.Root.Elements().First());
+
+        public Album GetAlbum(int id)
+        {
+            RestCommand command = new RestCommand
+            {
+                MethodName = "getAlbum",
+                Parameters = {new RestParameter {Parameter = "id", Value = id.ToString()}}
+            };
+            XDocument document = GetResponseXDocument(command);
+            return GetAlbum(document);
+        }
+
         #endregion Browsing
     }
 }

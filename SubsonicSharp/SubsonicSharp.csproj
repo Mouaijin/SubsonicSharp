@@ -51,8 +51,6 @@
     <Compile Include="SubTypes\Playlist.cs" />
     <Compile Include="SubTypes\PlayQueue.cs" />
     <Compile Include="SubTypes\SearchResult.cs" />
-    <Compile Include="SubTypes\Song.cs" />
-    <Compile Include="SubTypes\Video.cs" />
     <Compile Include="UserToken.cs" />
     <Compile Include="ExtensionMethods.cs" />
   </ItemGroup>

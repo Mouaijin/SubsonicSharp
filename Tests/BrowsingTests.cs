@@ -92,5 +92,16 @@ namespace Tests
             Assert.AreEqual(11047, artist.Albums.First().Id);
             Assert.AreEqual(11061, artist.Albums.Last().Id);
         }
+
+        [TestMethod]
+        public void GetAlbumTest()
+        {
+            XDocument xDoc = XDocument.Load("TestData/album_example_1.xml");
+            Album album = Client.GetAlbum(xDoc);
+            Assert.AreEqual(8, album.SongCount);
+            Assert.AreEqual(8, album.Songs.Count());
+            Assert.AreEqual("High Voltage", album.Name);
+            Assert.AreEqual(71463, album.Songs.First().Id);
+        }
     }
 }

@@ -66,6 +66,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="TestData\album_example_1.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestData\artists_example_1.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
