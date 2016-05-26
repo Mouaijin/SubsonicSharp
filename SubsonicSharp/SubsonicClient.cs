@@ -194,6 +194,18 @@ namespace SubsonicSharp
             return GetAlbum(document);
         }
 
+        public Child GetSong(XDocument document) => Child.Create(document.Root.Elements().First());
+
+        public Child GetSong(int id)
+        {
+            RestCommand command = new RestCommand
+            { MethodName = "getSong",
+            Parameters = {new RestParameter { Parameter = "id", Value = id.ToString()} }
+            };
+            XDocument document = GetResponseXDocument(command);
+            return GetSong(document);
+        }
+
         #endregion Browsing
     }
 }

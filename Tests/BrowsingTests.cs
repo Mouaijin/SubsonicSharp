@@ -103,5 +103,17 @@ namespace Tests
             Assert.AreEqual("High Voltage", album.Name);
             Assert.AreEqual(71463, album.Songs.First().Id);
         }
+
+        [TestMethod]
+        public void GetSongTest()
+        {
+            XDocument xDoc = XDocument.Load("TestData/song_example_1.xml");
+            Child song = Client.GetSong(xDoc);
+            Assert.AreEqual(48228, song.Id);
+            Assert.AreEqual("ACDC/Back in black/ACDC - You Shook Me All Night Long.mp3",song.Path);
+            Assert.AreEqual(48203, song.Parent);
+            Assert.IsFalse(song.IsDirectory);
+            Assert.IsFalse(song.IsVideo.Value);
+        }
     }
 }
