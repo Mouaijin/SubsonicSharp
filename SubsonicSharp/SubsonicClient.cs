@@ -206,6 +206,18 @@ namespace SubsonicSharp
             return GetSong(document);
         }
 
+        public IEnumerable<Child> GetVideos(XDocument document) => document.Root.Elements().First().EnumerateChildren();
+
+        public IEnumerable<Child> GetVideos()
+        {
+            RestCommand command = new RestCommand
+            {
+                MethodName = "getVideos"
+            };
+            XDocument document = GetResponseXDocument(command);
+            return GetVideos(document);
+        }
+
         public ArtistInfo GetArtistInfo(XDocument document) => ArtistInfo.Create(document.Root.Elements().First());
 
         public ArtistInfo GetArtistInfo(int id, int count = 20, bool includeNotPresent = false)

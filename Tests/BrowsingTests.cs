@@ -117,6 +117,15 @@ namespace Tests
         }
 
         [TestMethod]
+        public void GetVideosTest()
+        {
+            XDocument xDoc = XDocument.Load("TestData/videos_example_1.xml");
+            IEnumerable<Child> videos = Client.GetVideos(xDoc);
+            Assert.AreEqual(7228, videos.First().Id);
+            Assert.IsFalse(videos.Any(x => x.IsVideo == false));
+        }
+
+        [TestMethod]
         public void GetArtistInfoTest()
         {
             XDocument xDoc = XDocument.Load("TestData/artistInfo_example_1.xml");

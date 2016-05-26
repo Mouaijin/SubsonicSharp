@@ -71,7 +71,7 @@ namespace SubsonicSharp
             return xml.Elements().Where(x => x.Name.LocalName == "album").Select(Album.Create);
         }
 
-        public static IEnumerable<Child> EnumaerateSongs(this XElement xml)
+        public static IEnumerable<Child> EnumerateChildren(this XElement xml)
         {
             return
                 xml.Elements()
