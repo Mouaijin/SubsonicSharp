@@ -27,6 +27,7 @@ PCL for accessing the Subsonic Music Server API in .NET without actually using t
   - Get Artist Info 2
   - Get Similar Songs
   - Get Similar Songs 2
+  - Get Top Songs
 
 ###Incomplete
 
@@ -34,7 +35,6 @@ PCL for accessing the Subsonic Music Server API in .NET without actually using t
   - Get Video Info (1.14+)
   - Get Album Info (1.14+)
   - Get Album Info 2 (1.14+)
-  - Get Top Songs
 - Album/Song Lists
   - Get Album List
   - Get Album List 2
@@ -52,7 +52,7 @@ PCL for accessing the Subsonic Music Server API in .NET without actually using t
   - Get Playlist
   - Create Playlist
   - Update Playlist
-  -Delete Playlist
+  - Delete Playlist
 - Media Retrieval
   - Stream
   - Download

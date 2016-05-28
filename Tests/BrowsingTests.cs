@@ -167,5 +167,16 @@ namespace Tests
             Assert.IsFalse(songs.Any(x => x.IsDirectory));
             Assert.IsFalse(songs.Any(x => x.IsVideo.Value == true));
         }
+
+        [TestMethod]
+        public void GetTopSongsTest()
+        {
+            XDocument xDoc = XDocument.Load("TestData/topSongs_example_1.xml");
+            IEnumerable<Child> songs = Client.Browsing.GetTopSongs(xDoc);
+            Assert.AreEqual(1013, songs.First().Id);
+            Assert.AreEqual(3, songs.Count());
+            Assert.IsFalse(songs.Any(x => x.IsDirectory || x.IsVideo.Value));
+            Assert.AreEqual(1, songs.Select(x => x.Artist).Distinct().Count());
+        }
     }
 }
