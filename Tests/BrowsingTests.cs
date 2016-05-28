@@ -22,7 +22,7 @@ namespace Tests
         public void GetMusicFoldersTest()
         {
             XDocument xDoc = XDocument.Load("TestData/musicFolders_example_1.xml");
-            IEnumerable<BasicItem> folders = Client.GetMusicFolders(xDoc);
+            IEnumerable<BasicItem> folders = Client.Browsing.GetMusicFolders(xDoc);
             List<BasicItem> expectedFolders = new List<BasicItem>
             {
                 new BasicItem {Id = 1, Kind = ItemType.MusicFolder, Name = "Music"},
@@ -42,7 +42,7 @@ namespace Tests
         public void GetIndexesTest()
         {
             XDocument xDoc = XDocument.Load("TestData/indexes_example_1.xml");
-            IndexesCollection collection = Client.GetIndexes(xDoc);
+            IndexesCollection collection = Client.Browsing.GetIndexes(xDoc);
             Assert.AreEqual(2, collection.Shortcuts.Count(), "Bad shorcuts count");
             Assert.AreEqual(2, collection.Indexes.Keys.Count, "Bad dictionary key count");
             Assert.AreEqual("Bob Dylan", collection.Indexes["B"].Single().Name, "Bob Dylan as only artist in 'B' failed");
@@ -54,7 +54,7 @@ namespace Tests
         public void GetMusicDirectoryTest()
         {
             XDocument xDoc = XDocument.Load("TestData/directory_example_2.xml");
-            Directory dir = Client.GetMusicDirectory(xDoc);
+            Directory dir = Client.Browsing.GetMusicDirectory(xDoc);
             Assert.AreEqual(2, dir.Children.Count());
             Assert.AreEqual(11, dir.Id);
             Assert.AreEqual("Arrival", dir.Name);
@@ -65,7 +65,7 @@ namespace Tests
         public void GetGenresTest()
         {
             XDocument xDoc = XDocument.Load("TestData/genres_example_1.xml");
-            IEnumerable<Genre> genres = Client.GetGenres(xDoc);
+            IEnumerable<Genre> genres = Client.Browsing.GetGenres(xDoc);
             Assert.AreEqual("Electronic", genres.First().Name);
             Assert.AreEqual(28, genres.First().SongCount);
             Assert.AreEqual(7, genres.Count());
@@ -75,7 +75,7 @@ namespace Tests
         public void GetArtistsTest()
         {
             XDocument xDoc =XDocument.Load("TestData/artists_example_1.xml");
-            Dictionary<string, IEnumerable<Artist>> artists = Client.GetArtists(xDoc);
+            Dictionary<string, IEnumerable<Artist>> artists = Client.Browsing.GetArtists(xDoc);
             Assert.AreEqual("A-Ha", artists["A"].First().Name);
             Assert.AreEqual(2, artists["B"].Count());
         }
@@ -84,7 +84,7 @@ namespace Tests
         public void GetArtistTest()
         {
             XDocument xDoc = XDocument.Load("TestData/artist_example_1.xml");
-            Artist artist = Client.GetArtist(xDoc);
+            Artist artist = Client.Browsing.GetArtist(xDoc);
             Assert.AreEqual(5432, artist.Id);
             Assert.AreEqual("AC/DC", artist.Name);
             Assert.AreEqual(15, artist.AlbumCount);
@@ -97,7 +97,7 @@ namespace Tests
         public void GetAlbumTest()
         {
             XDocument xDoc = XDocument.Load("TestData/album_example_1.xml");
-            Album album = Client.GetAlbum(xDoc);
+            Album album = Client.Browsing.GetAlbum(xDoc);
             Assert.AreEqual(8, album.SongCount);
             Assert.AreEqual(8, album.Songs.Count());
             Assert.AreEqual("High Voltage", album.Name);
@@ -108,7 +108,7 @@ namespace Tests
         public void GetSongTest()
         {
             XDocument xDoc = XDocument.Load("TestData/song_example_1.xml");
-            Child song = Client.GetSong(xDoc);
+            Child song = Client.Browsing.GetSong(xDoc);
             Assert.AreEqual(48228, song.Id);
             Assert.AreEqual("ACDC/Back in black/ACDC - You Shook Me All Night Long.mp3",song.Path);
             Assert.AreEqual(48203, song.Parent);
@@ -120,7 +120,7 @@ namespace Tests
         public void GetVideosTest()
         {
             XDocument xDoc = XDocument.Load("TestData/videos_example_1.xml");
-            IEnumerable<Child> videos = Client.GetVideos(xDoc);
+            IEnumerable<Child> videos = Client.Browsing.GetVideos(xDoc);
             Assert.AreEqual(7228, videos.First().Id);
             Assert.IsFalse(videos.Any(x => x.IsVideo == false));
         }
@@ -129,7 +129,7 @@ namespace Tests
         public void GetArtistInfoTest()
         {
             XDocument xDoc = XDocument.Load("TestData/artistInfo_example_1.xml");
-            ArtistInfo info = Client.GetArtistInfo(xDoc);
+            ArtistInfo info = Client.Browsing.GetArtistInfo(xDoc);
             Assert.AreEqual("5182c1d9-c7d2-4dad-afa0-ccfeada921a8", info.MusicBrainzId);
             Assert.AreEqual("http://www.last.fm/music/Black+Sabbath", info.LastFmUrl);
             Assert.AreEqual(3, info.SimilarArtists.Count());
@@ -140,7 +140,7 @@ namespace Tests
         public void GetArtistInfo2Test()
         {
             XDocument xDoc = XDocument.Load("TestData/artistInfo2_example_1.xml");
-            ArtistInfo info = Client.GetArtistInfo(xDoc);
+            ArtistInfo info = Client.Browsing.GetArtistInfo(xDoc);
             Assert.AreEqual("5182c1d9-c7d2-4dad-afa0-ccfeada921a8", info.MusicBrainzId);
             Assert.AreEqual("http://www.last.fm/music/Black+Sabbath", info.LastFmUrl);
             Assert.AreEqual(8, info.SimilarArtists.Count());
