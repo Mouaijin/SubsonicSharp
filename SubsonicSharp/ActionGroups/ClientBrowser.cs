@@ -140,6 +140,37 @@ namespace SubsonicSharp.ActionGroups
             return GetArtistInfo(document);
         }
 
+        public IEnumerable<Child> GetSimilarSongs(int id, int count = 50)
+        {
+            RestCommand command = new RestCommand
+            {
+                MethodName = "getSimilarSongs",
+                Parameters =
+                {
+                    new RestParameter {Parameter = "id", Value = id.ToString()},
+                    new RestParameter {Parameter = "count", Value = count.ToString()}
+                }
+            };
+            XDocument document = Client.GetResponseXDocument(command);
+            return GetSimilarSongs(document);
+        }
+
+        public IEnumerable<Child> GetSimilarSongs2(int id, int count = 50)
+        {
+            RestCommand command = new RestCommand
+            {
+                MethodName = "getSimilarSongs2",
+                Parameters =
+                {
+                    new RestParameter {Parameter = "id", Value = id.ToString()},
+                    new RestParameter {Parameter = "count", Value = count.ToString()}
+                }
+            };
+            XDocument document = Client.GetResponseXDocument(command);
+            return GetSimilarSongs(document);
+        }
+
+
         #endregion Public Methods
 
         #region Internal Methods
@@ -204,6 +235,9 @@ namespace SubsonicSharp.ActionGroups
 
 
         internal ArtistInfo GetArtistInfo(XDocument document) => ArtistInfo.Create(document.Root.Elements().First());
+
+        internal IEnumerable<Child> GetSimilarSongs(XDocument document)
+            => document.Root.Elements().First().EnumerateChildren();
 
         #endregion Internal Methods
     }

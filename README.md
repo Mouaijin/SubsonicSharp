@@ -22,18 +22,18 @@ PCL for accessing the Subsonic Music Server API in .NET without actually using t
   - Get Artist
   - Get Album
   - Get Song
+  - Get Videos
   - Get Artist Info
   - Get Artist Info 2
+  - Get Similar Songs
+  - Get Similar Songs 2
 
 ###Incomplete
 
 - Browsing
-  - Get Videos
-  - Get Video Info
-  - Get Album Info
-  - Get Album Info 2
-  - Get Similar Songs
-  - Get Similar Songs 2
+  - Get Video Info (1.14+)
+  - Get Album Info (1.14+)
+  - Get Album Info 2 (1.14+)
   - Get Top Songs
 - Album/Song Lists
   - Get Album List

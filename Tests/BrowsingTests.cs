@@ -146,5 +146,26 @@ namespace Tests
             Assert.AreEqual(8, info.SimilarArtists.Count());
             Assert.AreEqual("Guns N' Roses", info.SimilarArtists.Last().Name);
         }
+
+        [TestMethod]
+        public void GetSimilarSongsTest()
+        {
+            XDocument xDoc = XDocument.Load("TestData/similarSongs_example_1.xml");
+            IEnumerable<Child> songs = Client.Browsing.GetSimilarSongs(xDoc);
+            Assert.AreEqual(1631, songs.First().Id);
+            Assert.AreEqual(10, songs.Count());
+            Assert.IsFalse(songs.Any(x => x.IsDirectory));
+            Assert.IsFalse(songs.Any(x => x.IsVideo.Value == true));
+        }
+        [TestMethod]
+        public void GetSimilarSongs2Test()
+        {
+            XDocument xDoc = XDocument.Load("TestData/similarSongs2_example_1.xml");
+            IEnumerable<Child> songs = Client.Browsing.GetSimilarSongs(xDoc);
+            Assert.AreEqual(1009, songs.First().Id);
+            Assert.AreEqual(8, songs.Count());
+            Assert.IsFalse(songs.Any(x => x.IsDirectory));
+            Assert.IsFalse(songs.Any(x => x.IsVideo.Value == true));
+        }
     }
 }
