@@ -10,6 +10,14 @@ namespace SubsonicSharp
         public string Token { get; set; }
         public string Salt { get; set; }
 
+        //Simpler construction if token info already known
+        public UserToken(string username, string token, string salt)
+        {
+            Username = username;
+            Token = token;
+            Salt = salt;
+            Plaintext = false;
+        }
 
         public UserToken(string username, string password, bool plaintext = false, int saltLength = 6)
         {
