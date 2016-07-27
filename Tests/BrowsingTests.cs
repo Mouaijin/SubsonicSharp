@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
@@ -113,7 +114,7 @@ namespace Tests
             Assert.AreEqual("ACDC/Back in black/ACDC - You Shook Me All Night Long.mp3",song.Path);
             Assert.AreEqual(48203, song.Parent);
             Assert.IsFalse(song.IsDirectory);
-            Assert.IsFalse(song.IsVideo.Value);
+            Assert.IsFalse(song.IsVideo == null || song.IsVideo.Value);
         }
 
         [TestMethod]
@@ -155,7 +156,7 @@ namespace Tests
             Assert.AreEqual(1631, songs.First().Id);
             Assert.AreEqual(10, songs.Count());
             Assert.IsFalse(songs.Any(x => x.IsDirectory));
-            Assert.IsFalse(songs.Any(x => x.IsVideo.Value == true));
+            Assert.IsFalse(songs.Any(x => x.IsVideo == null || x.IsVideo.Value));
         }
         [TestMethod]
         public void GetSimilarSongs2Test()
@@ -165,7 +166,7 @@ namespace Tests
             Assert.AreEqual(1009, songs.First().Id);
             Assert.AreEqual(8, songs.Count());
             Assert.IsFalse(songs.Any(x => x.IsDirectory));
-            Assert.IsFalse(songs.Any(x => x.IsVideo.Value == true));
+            Assert.IsFalse(songs.Any(x => x.IsVideo == null || x.IsVideo.Value));
         }
 
         [TestMethod]
@@ -175,7 +176,7 @@ namespace Tests
             IEnumerable<Child> songs = Client.Browsing.GetTopSongs(xDoc);
             Assert.AreEqual(1013, songs.First().Id);
             Assert.AreEqual(3, songs.Count());
-            Assert.IsFalse(songs.Any(x => x.IsDirectory || x.IsVideo.Value));
+            Assert.IsFalse(songs.Any(x => x.IsVideo == null ||  x.IsDirectory || x.IsVideo.Value ));
             Assert.AreEqual(1, songs.Select(x => x.Artist).Distinct().Count());
         }
     }

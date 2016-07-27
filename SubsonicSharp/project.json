@@ -1,7 +1,10 @@
 ﻿{
   "supports": {},
-  "dependencies": {},
+  "dependencies": {
+    "FubarCoder.RestSharp.Portable": "3.3.0",
+    "System.Net.Http": "4.1.0"
+  },
   "frameworks": {
-    ".NETPortable,Version=v4.5,Profile=Profile7": {}
+    ".NETPortable,Version=v4.5,Profile=Profile111": {}
   }
 }

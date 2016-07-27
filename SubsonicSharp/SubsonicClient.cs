@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using System.Xml;
 using System.Xml.Linq;
+using RestSharp.Portable;
+using RestSharp.Portable.HttpClient;
 using SubsonicSharp.ActionGroups;
 using SubsonicSharp.SubTypes;
 
@@ -40,24 +37,44 @@ namespace SubsonicSharp
                 $"{Server.BaseUrl()}/rest/{command.MethodName}?{command.ParameterString()}{User}&{Server.VersionString()}&c={ClientName}";
         }
 
-        private async Task<string> GetResponseTask(RestCommand command)
+        private string GetResponseString(RestCommand command)
+        {
+            using (var client = new RestClient(new Uri(FormatCommand(command))))
+            {
+                var request = new RestRequest(Method.GET);
+                var result = client.Execute(request);
+                return result.Result.Content;
+            }
+        }
+
+        private string GetResponse(RestCommand command)
         {
             string url = FormatCommand(command);
-            Uri uri = new Uri(url);
             using (HttpClient client = new HttpClient())
-            using (HttpResponseMessage response = await client.GetAsync(uri))
-            using (HttpContent content = response.Content)
             {
-                return await content.ReadAsStringAsync();
+                return client.GetStringAsync(url).Result;
+            }
+        }
+
+        private Task<string> GetResponseAsync(RestCommand command)
+        {
+            string url = FormatCommand(command);
+            using (HttpClient client = new HttpClient())
+            {
+                return client.GetStringAsync(url);
             }
         }
 
         public XDocument GetResponseXDocument(RestCommand command)
         {
-            string text = GetResponseTask(command).Result;
+            string text = GetResponse(command);
             return XDocument.Parse(text);
         }
 
+        public Task<XDocument> GetResponseXDocumentAsync(RestCommand command)
+        {
+            return GetResponseAsync(command).ContinueWith(task => XDocument.Parse(task.Result));
+        }
         #region System
 
         //Return true on successful ping
