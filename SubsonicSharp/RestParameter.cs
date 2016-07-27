@@ -12,6 +12,22 @@ namespace SubsonicSharp
         public string Parameter { get; set; }
         public string Value { get; set; }
 
+        public RestParameter()
+        {
+        }
+
+        public RestParameter(string parameter, string value)
+        {
+            Parameter = parameter;
+            Value = value;
+        }
+
+        public RestParameter(string parameter, int value)
+        {
+            Parameter = parameter;
+            Value = value.ToString();
+        }
+
         public override string ToString()
         {
             return $"{Parameter}={Value}";

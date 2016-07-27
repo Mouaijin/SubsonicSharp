@@ -3,8 +3,6 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using RestSharp.Portable;
-using RestSharp.Portable.HttpClient;
 using SubsonicSharp.ActionGroups;
 using SubsonicSharp.SubTypes;
 
@@ -17,6 +15,7 @@ namespace SubsonicSharp
         public string ClientName { get; } = "SubSharp"; //Required field for requests
 
         public ClientBrowser Browsing { get; set; }
+        public MediaRetrieval MediaRetrieval { get; set; }
 
         public SubsonicClient(string username, string password, string address, int port = 4040)
         {
@@ -35,16 +34,6 @@ namespace SubsonicSharp
         {
             return
                 $"{Server.BaseUrl()}/rest/{command.MethodName}?{command.ParameterString()}{User}&{Server.VersionString()}&c={ClientName}";
-        }
-
-        private string GetResponseString(RestCommand command)
-        {
-            using (var client = new RestClient(new Uri(FormatCommand(command))))
-            {
-                var request = new RestRequest(Method.GET);
-                var result = client.Execute(request);
-                return result.Result.Content;
-            }
         }
 
         private string GetResponse(RestCommand command)

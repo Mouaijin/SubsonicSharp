@@ -6,6 +6,10 @@ PCL for accessing the Subsonic Music Server API in .NET without actually using t
 2. Create a completely portable library for development of Subsonic clients on any device
 3. Lower the barrier to entry drastically for use of the API
 
+####Media Retrieval Note
+This library currently supports passing the URL string needed to stream or download files, but does not pass the data itself.
+This may be addressed with platform-specific DI projects in the future (pull requests welcome), but due to the differences in how each platform handles this data this is a secondary goal.
+
 ##API Coverage Progress
 
 ###Complete
@@ -28,6 +32,11 @@ PCL for accessing the Subsonic Music Server API in .NET without actually using t
   - Get Similar Songs
   - Get Similar Songs 2
   - Get Top Songs
+- Media Retrieval
+  - Stream
+  - Download
+  - Get Cover Art
+  - Get Lyrics
 
 ###Incomplete
 

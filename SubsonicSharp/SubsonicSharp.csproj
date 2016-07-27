@@ -35,7 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ActionGroups\ClientBrowser.cs" />
-    <Compile Include="ActionGroups\MediaRetriever.cs" />
+    <Compile Include="ActionGroups\MediaRetrieval.cs" />
     <Compile Include="BasicItem.cs" />
     <Compile Include="IStreamingAudio.cs" />
     <Compile Include="RestCommand.cs" />
@@ -51,6 +51,7 @@
     <Compile Include="SubTypes\Genre.cs" />
     <Compile Include="SubTypes\IndexesCollection.cs" />
     <Compile Include="SubTypes\License.cs" />
+    <Compile Include="SubTypes\Lyrics.cs" />
     <Compile Include="SubTypes\NowPlaying.cs" />
     <Compile Include="SubTypes\Playlist.cs" />
     <Compile Include="SubTypes\PlayQueue.cs" />
