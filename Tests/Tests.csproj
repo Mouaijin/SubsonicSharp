@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="BrowsingTests.cs" />
     <Compile Include="ConnectionTests.cs" />
+    <Compile Include="InformationListsTests.cs" />
     <Compile Include="MediaTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchTests.cs" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using SubsonicSharp.SubTypes;
 
 namespace SubsonicSharp.ActionGroups
@@ -42,7 +43,10 @@ namespace SubsonicSharp.ActionGroups
             }
             if (!string.IsNullOrEmpty(genre)) command.AddParameter("genre", genre);
             if (musicFolderId >= 0) command.AddParameter("musicFolderId", musicFolderId);
-            return Client.GetResponseXDocument(command).Root.Elements().First().Elements().Select(Album.Create);
+            foreach (XElement element in Client.GetResponseXDocument(command).Root.Elements().First().Elements())
+            {
+                yield return Album.Create(element);
+            }
         }
 
         /// <summary>
