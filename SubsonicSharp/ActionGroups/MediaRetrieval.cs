@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using SubsonicSharp.SubTypes;
 
@@ -17,6 +15,7 @@ namespace SubsonicSharp.ActionGroups
         {
             Client = client;
         }
+
         #region Public Methods
 
         /// <summary>
@@ -38,11 +37,11 @@ namespace SubsonicSharp.ActionGroups
                     new RestParameter {Parameter = "id", Value = id.ToString()}
                 }
             };
-            if(maxBitRate != 0)
+            if (maxBitRate != 0)
                 command.Parameters.Add(new RestParameter("maxBitRate", maxBitRate));
-            if(format != null)
+            if (format != null)
                 command.Parameters.Add(new RestParameter("format", format));
-            if(estimateContentLength)
+            if (estimateContentLength)
                 command.Parameters.Add(new RestParameter("estimateContentLength", bool.TrueString));
 
             return Client.FormatCommand(command);
@@ -62,6 +61,7 @@ namespace SubsonicSharp.ActionGroups
             };
             return Client.FormatCommand(command);
         }
+
         /// <summary>
         /// Returns a cover art image
         /// </summary>
@@ -72,6 +72,7 @@ namespace SubsonicSharp.ActionGroups
         {
             return GetCovertArtAsync(id, size).Result;
         }
+
         /// <summary>
         /// Returns a cover art image asynchronously
         /// </summary>
@@ -83,20 +84,24 @@ namespace SubsonicSharp.ActionGroups
             RestCommand command = new RestCommand
             {
                 MethodName = "getCoverArt",
-                Parameters = { new RestParameter("id", id) }
+                Parameters = {new RestParameter("id", id)}
             };
             if (size > 0)
             {
                 command.Parameters.Add(new RestParameter("size", size));
             }
-            using (HttpClient http = new HttpClient())
+            return Task<byte[]>.Factory.StartNew(() =>
             {
-                return http.GetByteArrayAsync(Client.FormatCommand(command));
-            }
-}
+                using (HttpClient http = new HttpClient())
+                {
+                    http.Timeout = TimeSpan.FromDays(1);
+                    return http.GetByteArrayAsync(Client.FormatCommand(command)).Result;
+                }
+            });
+        }
 
         /// <summary>
-        /// Searches for and returns lyrics for a given song. 
+        /// Searches for and returns lyrics for a given song.
         /// </summary>
         /// <param name="artist">The artist name</param>
         /// <param name="title">The song title</param>
@@ -105,15 +110,16 @@ namespace SubsonicSharp.ActionGroups
         {
             if (artist == null && title == null)
                 return null;
-            
+
             RestCommand command = new RestCommand {MethodName = "getLyrics"};
-            if(artist != null)
+            if (artist != null)
                 command.Parameters.Add(new RestParameter("artist", artist));
-            if(title != null)
+            if (title != null)
                 command.Parameters.Add(new RestParameter("title", title));
 
-            return new Lyrics(Client.GetResponseXDocument(command).Root.Elements("lyrics").First());
+            return new Lyrics(Client.GetResponseXDocument(command).Root.Elements().First());
         }
+
         #endregion Public Methods
     }
 }

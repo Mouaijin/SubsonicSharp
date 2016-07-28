@@ -4,6 +4,7 @@ using SubsonicSharp;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using SubsonicSharp.SubTypes;
 
 namespace Tests
 {
@@ -39,13 +40,21 @@ namespace Tests
         [TestMethod]
         public void GetCoverArtTest()
         {
-            Client.MediaRetrieval.GetCovertArtAsync(999).ContinueWith(result =>
-            {
-                using (var img = Image.FromStream(new MemoryStream(result.Result)))
-                {
-                    img.Save("C:\\Users\\thechr\\Desktop\\testing.jpg", ImageFormat.Jpeg);
-                }
-            });
+            byte[] bytes = Client.MediaRetrieval.GetCovertArt(999);
+            File.WriteAllBytes("C:\\Users\\thech\\Desktop\\testing.jpg", bytes);
+        }
+
+        [TestMethod]
+        public void GetLyricsTest()
+        {
+            string artist = "Muse";
+            string title = "Hysteria";
+            Lyrics actual = Client.MediaRetrieval.GetLyrics(artist, title);
+            string expectedText =
+                "It\'s bugging me";
+            Assert.AreEqual(artist, actual.Artist);
+            Assert.AreEqual(title, actual.Title);
+            Assert.IsTrue(actual.Text.StartsWith(expectedText));
         }
     }
 }
