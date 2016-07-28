@@ -15,22 +15,24 @@ namespace SubsonicSharp.SubTypes
         public static SearchResult Create(XElement xml)
         {
             SearchResult result = new SearchResult();
-            result.Artists = xml.Elements("artist").Select(delegate(XElement element)
+            result.Artists = xml.Elements().Where(x => x.Name.LocalName=="artist").Select(delegate(XElement element)
             {
                 result.TotalHits++;
                 return Artist.Create(element);
             });
-            result.Albums = xml.Elements("album").Select(delegate(XElement element)
+            result.Albums = xml.Elements().Where(x => x.Name.LocalName == "album").Select(delegate(XElement element)
             {
                 result.TotalHits++;
                 return Album.Create(element);
             });
-            result.Items = xml.Elements("song").Select(delegate(XElement element)
+            result.Items = xml.Elements().Where(x => x.Name.LocalName=="song" || x.Name.LocalName=="video").Select(delegate(XElement element)
             {
                 result.TotalHits++;
                 return Child.Create(element);
             });
             return result;
         }
+
+
     }
 }

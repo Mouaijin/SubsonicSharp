@@ -36,7 +36,7 @@ namespace SubsonicSharp.SubTypes
             if(xml.HasAttribute("starred"))
                 album.Starred = DateTime.Parse(xml.Attribute("starred").Value);
             if (xml.HasAttribute("year"))
-                album.Year = Convert.ToInt32(xml.Attribute("year"));
+                album.Year = Convert.ToInt32(xml.Attribute("year").Value);
             album.Songs = xml.EnumerateChildren();
             return album;
         }

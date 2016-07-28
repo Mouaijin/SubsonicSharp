@@ -59,6 +59,7 @@
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="MediaTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SearchTests.cs" />
     <Compile Include="UserTokenTests.cs" />
   </ItemGroup>
   <ItemGroup>
