@@ -87,8 +87,12 @@ namespace SubsonicSharp
             XElement licenseElement = document.Root.Descendants().First();
             string valid = licenseElement.Attribute("valid").Value;
             string email = licenseElement.Attribute("email").Value;
-            string expires = licenseElement.LastAttribute.Value;
-            //Accessed without name because it varies between "licenseExpires" and "trialExpires"
+            string expires = "";
+            if (licenseElement.HasAttribute("licenseExpires"))
+                expires = licenseElement.Attribute("licenseExpires").Value;
+            else if (licenseElement.HasAttribute("trialExpires"))
+                expires = licenseElement.Attribute("trialExpires").Value;
+            else expires = "1999-06-14T14:05:06.578Z";
             return new License(valid, email, expires);
         }
 

@@ -42,9 +42,9 @@ namespace Tests
         {
             License license = Client.GetLicense();
             Assert.AreEqual(true, license.Valid);
-            Assert.AreEqual("foo@bar.com", license.Email);
+            Assert.AreEqual("vypon3000@gmail.com", license.Email);
             //DateTime seems to be returned in UTC format- DateTime.Parse should be okay with this
-            DateTime expected = new DateTime(2016, 4, 12, 1, 9, 30, 679);
+            DateTime expected = new DateTime(2017, 6, 14, 10, 5, 6, 578);
             Assert.AreEqual(expected, license.Expires);
         }
     }

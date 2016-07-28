@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace SubsonicSharp.SubTypes
 {
-    class NowPlaying : Child
+    public class NowPlaying : Child
     {
         public string UserName { get; set; }
         public int MinutesAgo { get; set; }
