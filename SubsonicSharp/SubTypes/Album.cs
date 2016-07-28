@@ -21,13 +21,15 @@ namespace SubsonicSharp.SubTypes
 
         public static Album Create(XElement xml)
         {
-            Album album = new Album();
-            album.Id = Convert.ToInt32(xml.Attribute("id").Value);
-            album.Name = xml.Attribute("name").Value;
-            album.SongCount = Convert.ToInt32(xml.Attribute("songCount").Value);
-            album.Duration = Convert.ToInt64(xml.Attribute("duration").Value);
-            album.Created = DateTime.Parse(xml.Attribute("created").Value);
-            album.Artist = xml.AttributeValueOrNull("artist");
+            Album album = new Album
+            {
+                Id = Convert.ToInt32(xml.Attribute("id").Value),
+                Name = xml.Attribute("name").Value,
+                SongCount = Convert.ToInt32(xml.Attribute("songCount").Value),
+                Duration = Convert.ToInt64(xml.Attribute("duration").Value),
+                Created = DateTime.Parse(xml.Attribute("created").Value),
+                Artist = xml.AttributeValueOrNull("artist")
+            };
             if (xml.HasAttribute("artistId"))
                 album.ArtistId = Convert.ToInt32(xml.Attribute("artistId").Value);
             album.CoverArt = xml.AttributeValueOrNull("coverArt");

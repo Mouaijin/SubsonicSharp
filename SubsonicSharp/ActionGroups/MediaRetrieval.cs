@@ -12,6 +12,11 @@ namespace SubsonicSharp.ActionGroups
     public class MediaRetrieval
     {
         public SubsonicClient Client { get; private set; }
+
+        public MediaRetrieval(SubsonicClient client)
+        {
+            Client = client;
+        }
         #region Public Methods
 
         /// <summary>
@@ -88,7 +93,7 @@ namespace SubsonicSharp.ActionGroups
             {
                 return http.GetByteArrayAsync(Client.FormatCommand(command));
             }
-        }
+}
 
         /// <summary>
         /// Searches for and returns lyrics for a given song. 

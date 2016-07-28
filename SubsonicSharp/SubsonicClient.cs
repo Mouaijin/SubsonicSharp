@@ -17,10 +17,11 @@ namespace SubsonicSharp
         public ClientBrowser Browsing { get; set; }
         public MediaRetrieval MediaRetrieval { get; set; }
 
+        public Search Search { get; set; }
+
         public SubsonicClient(string username, string password, string address, int port = 4040)
+            : this(new UserToken(username, password), new ServerInfo(address, port))
         {
-            User = new UserToken(username, password);
-            Server = new ServerInfo(address, port);
         }
 
         public SubsonicClient(UserToken user, ServerInfo server)
@@ -28,6 +29,8 @@ namespace SubsonicSharp
             User = user;
             Server = server;
             Browsing = new ClientBrowser(this);
+            MediaRetrieval = new MediaRetrieval(this);
+            Search = new Search(this);
         }
 
         public string FormatCommand(RestCommand command)
@@ -64,19 +67,20 @@ namespace SubsonicSharp
         {
             return GetResponseAsync(command).ContinueWith(task => XDocument.Parse(task.Result));
         }
+
         #region System
 
         //Return true on successful ping
         public bool PingServer()
         {
-            RestCommand ping = new RestCommand { MethodName = "ping" };
+            RestCommand ping = new RestCommand {MethodName = "ping"};
             XDocument document = GetResponseXDocument(ping);
             return document.Root.Attribute("status").Value.Equals("ok");
         }
 
         public License GetLicense()
         {
-            RestCommand licenseCommand = new RestCommand { MethodName = "getLicense" };
+            RestCommand licenseCommand = new RestCommand {MethodName = "getLicense"};
             XDocument document = GetResponseXDocument(licenseCommand);
             XElement licenseElement = document.Root.Descendants().First();
             string valid = licenseElement.Attribute("valid").Value;
@@ -87,6 +91,5 @@ namespace SubsonicSharp
         }
 
         #endregion System
-
     }
 }

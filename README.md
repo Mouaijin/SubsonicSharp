@@ -37,7 +37,9 @@ This may be addressed with platform-specific DI projects in the future (pull req
   - Download
   - Get Cover Art
   - Get Lyrics
-
+- Searching
+  - Search 2
+  - Search 3
 ###Incomplete
 
 - Browsing
@@ -53,9 +55,7 @@ This may be addressed with platform-specific DI projects in the future (pull req
   - Get Starred
   - Get Starred 2
 - Searching
-  - Search
-  - Search 2
-  - Search 3
+  - Search (deprecated in 1.4, will not implement)
 - Playlists
   - GetPlaylists
   - Get Playlist

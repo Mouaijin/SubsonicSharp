@@ -36,6 +36,7 @@
   <ItemGroup>
     <Compile Include="ActionGroups\ClientBrowser.cs" />
     <Compile Include="ActionGroups\MediaRetrieval.cs" />
+    <Compile Include="ActionGroups\Search.cs" />
     <Compile Include="BasicItem.cs" />
     <Compile Include="IStreamingAudio.cs" />
     <Compile Include="RestCommand.cs" />
