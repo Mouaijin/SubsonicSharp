@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
+using SubsonicSharp.ActionGroups;
 using SubsonicSharp.SubTypes;
 
 namespace SubsonicSharp
@@ -79,6 +80,35 @@ namespace SubsonicSharp
                                 || x.Name.LocalName == "child"
                                 || x.Name.LocalName == "video")
                     .Select(Child.Create);
+        }
+
+        public static string ConvertToString(this ListOrdering type)
+        {
+            switch (type)
+            {
+                case ListOrdering.Random:
+                    return "random";
+                case ListOrdering.Newest:
+                    return "newest";
+                case ListOrdering.Highest:
+                    return "highest";
+                case ListOrdering.Frequent:
+                    return "frequent";
+                case ListOrdering.Recent:
+                    return "recent";
+                case ListOrdering.AlphabeticalByName:
+                    return "alphabeticalByName";
+                case ListOrdering.AlphabeticalByArtist:
+                    return "alphabeticalByArtist";
+                case ListOrdering.Starred:
+                    return "starred";
+                case ListOrdering.ByYear:
+                    return "byYear";
+                case ListOrdering.ByGenre:
+                    return "byGenre";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(type), type, null);
+            }
         }
     }
 }

@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ActionGroups\ClientBrowser.cs" />
+    <Compile Include="ActionGroups\InformationLists.cs" />
     <Compile Include="ActionGroups\MediaRetrieval.cs" />
     <Compile Include="ActionGroups\Search.cs" />
     <Compile Include="BasicItem.cs" />
