@@ -55,6 +55,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BookmarksTests.cs" />
     <Compile Include="BrowsingTests.cs" />
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="InformationListsTests.cs" />
