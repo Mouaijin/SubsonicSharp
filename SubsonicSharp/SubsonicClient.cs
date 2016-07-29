@@ -17,6 +17,7 @@ namespace SubsonicSharp
         public ClientBrowser Browsing { get; set; }
         public MediaRetrieval MediaRetrieval { get; set; }
         public InformationLists InformationLists { get; set; }
+        public UserManagement UserManagement { get; set; }
 
         public Search Search { get; set; }
 
@@ -33,6 +34,7 @@ namespace SubsonicSharp
             MediaRetrieval = new MediaRetrieval(this);
             Search = new Search(this);
             InformationLists = new InformationLists(this);
+            UserManagement = new UserManagement(this);
         }
 
         public string FormatCommand(RestCommand command)

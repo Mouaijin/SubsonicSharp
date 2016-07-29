@@ -34,10 +34,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="ActionGroups\Bookmarks.cs" />
+    <Compile Include="ActionGroups\MediaAnnotation.cs" />
+    <Compile Include="ActionGroups\Playlists.cs" />
     <Compile Include="ActionGroups\ClientBrowser.cs" />
     <Compile Include="ActionGroups\InformationLists.cs" />
     <Compile Include="ActionGroups\MediaRetrieval.cs" />
     <Compile Include="ActionGroups\Search.cs" />
+    <Compile Include="ActionGroups\Sharing.cs" />
+    <Compile Include="ActionGroups\UserManagement.cs" />
     <Compile Include="BasicItem.cs" />
     <Compile Include="IStreamingAudio.cs" />
     <Compile Include="RestCommand.cs" />
@@ -58,6 +63,7 @@
     <Compile Include="SubTypes\Playlist.cs" />
     <Compile Include="SubTypes\PlayQueue.cs" />
     <Compile Include="SubTypes\SearchResult.cs" />
+    <Compile Include="SubTypes\User.cs" />
     <Compile Include="UserToken.cs" />
     <Compile Include="ExtensionMethods.cs" />
   </ItemGroup>

@@ -43,7 +43,7 @@ namespace SubsonicSharp.ActionGroups
             }
             if (!string.IsNullOrEmpty(genre)) command.AddParameter("genre", genre);
             if (musicFolderId >= 0) command.AddParameter("musicFolderId", musicFolderId);
-            foreach (XElement element in Client.GetResponseXDocument(command).Root.Elements().First().Elements())
+            foreach (XElement element in Client.GetResponseXDocument(command).RealRoot().Elements())
             {
                 yield return Album.Create(element);
             }
@@ -75,7 +75,7 @@ namespace SubsonicSharp.ActionGroups
             }
             if (!string.IsNullOrEmpty(genre)) command.AddParameter("genre", genre);
             if (musicFolderId >= 0) command.AddParameter("musicFolderId", musicFolderId);
-            return Client.GetResponseXDocument(command).Root.Elements().First().Elements().Select(Album.Create);
+            return Client.GetResponseXDocument(command).RealRoot().Elements().Select(Album.Create);
         }
 
         /// <summary>
@@ -97,7 +97,7 @@ namespace SubsonicSharp.ActionGroups
             if (fromYear != -1) command.AddParameter("fromYear", fromYear);
             if (toYear != -1) command.AddParameter("toYear", toYear);
             if (musicFolderId >= 0) command.AddParameter("musicfolderId", musicFolderId);
-            return Client.GetResponseXDocument(command).Root.Elements().First().Elements().Select(Child.Create);
+            return Client.GetResponseXDocument(command).RealRoot().Elements().Select(Child.Create);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace SubsonicSharp.ActionGroups
             if (count != 10) command.AddParameter("count", count);
             if (offset != 0) command.AddParameter("offset", offset);
             if (musicFolderId >= 0) command.AddParameter("musicFolderId", musicFolderId);
-            return Client.GetResponseXDocument(command).Root.Elements().First().Elements().Select(Child.Create);
+            return Client.GetResponseXDocument(command).RealRoot().Elements().Select(Child.Create);
         }
 
         /// <summary>
@@ -143,7 +143,7 @@ namespace SubsonicSharp.ActionGroups
             RestCommand command = new RestCommand();
             command.MethodName = "getStarred";
             if (musicFolderId >= 0) command.AddParameter("musicFolderId", musicFolderId);
-            return SearchResult.Create(Client.GetResponseXDocument(command).Root.Elements().First());
+            return SearchResult.Create(Client.GetResponseXDocument(command).RealRoot());
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace SubsonicSharp.ActionGroups
             RestCommand command = new RestCommand();
             command.MethodName = "getStarred2";
             if (musicFolderId >= 0) command.AddParameter("musicFolderId", musicFolderId);
-            return SearchResult.Create(Client.GetResponseXDocument(command).Root.Elements().First());
+            return SearchResult.Create(Client.GetResponseXDocument(command).RealRoot());
         }
     }
 

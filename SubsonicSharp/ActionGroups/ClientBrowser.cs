@@ -231,30 +231,30 @@ namespace SubsonicSharp.ActionGroups
         {
             Dictionary<string, IEnumerable<Artist>> dict = new Dictionary<string, IEnumerable<Artist>>();
             foreach (
-                XElement index in document.Root.Elements().First().Elements().Where(x => x.Name.LocalName == "index"))
+                XElement index in document.RealRoot().Elements().Where(x => x.Name.LocalName == "index"))
             {
                 dict.Add(index.Attribute("name").Value, index.EnumerateArtists());
             }
             return dict;
         }
 
-        internal Artist GetArtist(XDocument document) => Artist.Create(document.Root.Elements().First());
-        internal Album GetAlbum(XDocument document) => Album.Create(document.Root.Elements().First());
+        internal Artist GetArtist(XDocument document) => Artist.Create(document.RealRoot());
+        internal Album GetAlbum(XDocument document) => Album.Create(document.RealRoot());
 
-        internal Child GetSong(XDocument document) => Child.Create(document.Root.Elements().First());
+        internal Child GetSong(XDocument document) => Child.Create(document.RealRoot());
 
 
         internal IEnumerable<Child> GetVideos(XDocument document)
-            => document.Root.Elements().First().EnumerateChildren();
+            => document.RealRoot().EnumerateChildren();
 
 
-        internal ArtistInfo GetArtistInfo(XDocument document) => ArtistInfo.Create(document.Root.Elements().First());
+        internal ArtistInfo GetArtistInfo(XDocument document) => ArtistInfo.Create(document.RealRoot());
 
         internal IEnumerable<Child> GetSimilarSongs(XDocument document)
-            => document.Root.Elements().First().EnumerateChildren();
+            => document.RealRoot().EnumerateChildren();
 
         internal IEnumerable<Child> GetTopSongs(XDocument document)
-            => document.Root.Elements().First().EnumerateChildren();
+            => document.RealRoot().EnumerateChildren();
 
         #endregion Internal Methods
     }

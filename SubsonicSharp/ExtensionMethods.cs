@@ -110,5 +110,10 @@ namespace SubsonicSharp
                     throw new ArgumentOutOfRangeException(nameof(type), type, null);
             }
         }
+
+        public static XElement RealRoot(this XDocument doc)
+        {
+            return doc.Root.Elements().First();
+        }
     }
 }

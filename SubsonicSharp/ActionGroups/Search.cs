@@ -36,7 +36,7 @@ namespace SubsonicSharp.ActionGroups
             if (songCount != 20) command.Parameters.Add(new RestParameter("songCount", songCount));
             if (songOffset != 0) command.Parameters.Add(new RestParameter("songOffset", songOffset));
             if (musicFolderId >= 0) command.Parameters.Add(new RestParameter("musicFolderId", musicFolderId));
-            return SearchResult.Create(Client.GetResponseXDocument(command).Root.Elements().First());
+            return SearchResult.Create(Client.GetResponseXDocument(command).RealRoot());
         }
         /// <summary>
         /// Similar to search2, but organizes music according to ID3 tags. 
@@ -63,7 +63,7 @@ namespace SubsonicSharp.ActionGroups
             if (songCount != 20) command.Parameters.Add(new RestParameter("songCount", songCount));
             if (songOffset != 0) command.Parameters.Add(new RestParameter("songOffset", songOffset));
             if (musicFolderId >= 0) command.Parameters.Add(new RestParameter("musicFolderId", musicFolderId));
-            return SearchResult.Create(Client.GetResponseXDocument(command).Root.Elements().First());
+            return SearchResult.Create(Client.GetResponseXDocument(command).RealRoot());
         }
     }
 }

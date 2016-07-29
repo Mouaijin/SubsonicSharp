@@ -117,7 +117,7 @@ namespace SubsonicSharp.ActionGroups
             if (title != null)
                 command.Parameters.Add(new RestParameter("title", title));
 
-            return new Lyrics(Client.GetResponseXDocument(command).Root.Elements().First());
+            return new Lyrics(Client.GetResponseXDocument(command).RealRoot());
         }
 
         #endregion Public Methods

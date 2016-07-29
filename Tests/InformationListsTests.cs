@@ -33,5 +33,39 @@ namespace Tests
                 toYear: 2007);
             Assert.IsTrue(albums.Any());
         }
+
+        [TestMethod]
+        public void GetRandomSongsTest()
+        {
+            IEnumerable<Child> songs = Client.InformationLists.GetRandomSongs(size: 100);
+            Assert.IsTrue(songs.Any());
+        }
+
+        [TestMethod]
+        public void GetSongsByGenreTest()
+        {
+            IEnumerable<Child> songs = Client.InformationLists.GetSongsByGenre("Rock", count: 500);
+            Assert.IsTrue(songs.Any());
+        }
+
+        [TestMethod]
+        public void GetNowPlayingTest()
+        {
+            IEnumerable<NowPlaying> playing = Client.InformationLists.GetNowPlaying();
+            Assert.IsTrue(playing.Any());
+        }
+
+        [TestMethod]
+        public void GetStarredTest()
+        {
+            SearchResult starred = Client.InformationLists.GetStarred();
+            Assert.IsTrue(starred.Albums.Any() || starred.Artists.Any() || starred.Items.Any());
+        }
+        [TestMethod]
+        public void GetStarred2Test()
+        {
+            SearchResult starred = Client.InformationLists.GetStarred2(0);
+            Assert.IsTrue(starred.Albums.Any() || starred.Artists.Any() || starred.Items.Any());
+        }
     }
 }
