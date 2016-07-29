@@ -18,6 +18,7 @@ namespace SubsonicSharp
         public MediaRetrieval MediaRetrieval { get; set; }
         public InformationLists InformationLists { get; set; }
         public UserManagement UserManagement { get; set; }
+        public Sharing Sharing { get; set; }
 
         public Search Search { get; set; }
 
@@ -35,6 +36,7 @@ namespace SubsonicSharp
             Search = new Search(this);
             InformationLists = new InformationLists(this);
             UserManagement = new UserManagement(this);
+            Sharing = new Sharing(this);
         }
 
         public string FormatCommand(RestCommand command)
