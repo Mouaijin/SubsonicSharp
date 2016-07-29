@@ -60,6 +60,12 @@ This may be addressed with platform-specific DI projects in the future (pull req
   - Update User
   - Delete User
   - Change Password
+- Bookmarks
+ - Get Bookmarks
+ - Create Bookmark
+ - Delete Bookmarks
+ - Get Play Queue
+ - Save Play Queue
 
 ###Incomplete
 
@@ -97,9 +103,3 @@ This may be addressed with platform-specific DI projects in the future (pull req
 - Chat
   - Get Chat Messages
   - Add Chat Message
-- Bookmarks
- - Get Bookmarks
- - Create Bookmark
- - Delete Bookmarks
- - Get Play Queue
- - Save Play Queue
