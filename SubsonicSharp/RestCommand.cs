@@ -20,6 +20,12 @@ namespace SubsonicSharp
         {
             Parameters.Add(new RestParameter(name, value));
         }
+
+
+        public void AddParameter(string name, bool value)
+        {
+            Parameters.Add(new RestParameter(name,value));
+        }
         public string ParameterString()
         {
             StringBuilder chain = new StringBuilder();

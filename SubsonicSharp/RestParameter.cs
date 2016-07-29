@@ -28,6 +28,12 @@ namespace SubsonicSharp
             Value = value.ToString();
         }
 
+        public RestParameter(string parameter, bool value)
+        {
+            Parameter = parameter;
+            Value = value.ToString();
+        }
+
         public override string ToString()
         {
             return $"{Parameter}={Value}";

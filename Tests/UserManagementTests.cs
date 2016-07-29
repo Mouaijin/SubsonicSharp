@@ -37,21 +37,27 @@ namespace Tests
         [TestMethod]
         public void CreateUserTest()
         {
+            Assert.IsTrue(Client.UserManagement.CreateUser("test2","test2","email@email.com"));
         }
 
         [TestMethod]
         public void UpdateUserTest()
         {
-        }
-
-        [TestMethod]
-        public void DeleteUserTest()
-        {
+            Assert.IsTrue(Client.UserManagement.UpdateUser("test2", email: "changed@email.com"));
+            Assert.IsTrue(Client.UserManagement.GetUser("test2").Email == "changed@email.com");
         }
 
         [TestMethod]
         public void ChangePasswordTest()
         {
+            Assert.IsTrue(Client.UserManagement.ChangePassword("test2", "test3"));
         }
+
+        [TestMethod]
+        public void DeleteUserTest()
+        {
+            Assert.IsTrue(Client.UserManagement.DeleteUser("test2"));
+        }
+
     }
 }
