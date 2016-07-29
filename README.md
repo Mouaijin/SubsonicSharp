@@ -48,6 +48,12 @@ This may be addressed with platform-specific DI projects in the future (pull req
 - Searching
   - Search 2
   - Search 3
+- Playlists
+  - GetPlaylists
+  - Get Playlist
+  - Create Playlist
+  - Update Playlist
+  - Delete Playlist
 - Sharing
   - Get Shares
   - Create Share
@@ -75,12 +81,6 @@ This may be addressed with platform-specific DI projects in the future (pull req
   - Get Album Info 2 (1.14+)
 - Searching
   - Search (deprecated in 1.4, will not implement)
-- Playlists
-  - GetPlaylists
-  - Get Playlist
-  - Create Playlist
-  - Update Playlist
-  - Delete Playlist
 - Media Retrieval
   - HLS
   - Get Captions
