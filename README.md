@@ -48,6 +48,18 @@ This may be addressed with platform-specific DI projects in the future (pull req
 - Searching
   - Search 2
   - Search 3
+- Sharing
+  - Get Shares
+  - Create Share
+  - Update Share
+  - Delete Share
+- User Management
+  - Get User
+  - Get Users
+  - Create User
+  - Update User
+  - Delete User
+  - Change Password
 
 ###Incomplete
 
@@ -72,11 +84,6 @@ This may be addressed with platform-specific DI projects in the future (pull req
   - Unstar
   - Set Rating
   - Scrobble
-- Sharing
-  - Get Shares
-  - Create Share
-  - Update Share
-  - Delete Share
 - Podcast
   - Get Podcasts
   - Get Newest Podcasts
@@ -90,13 +97,6 @@ This may be addressed with platform-specific DI projects in the future (pull req
 - Chat
   - Get Chat Messages
   - Add Chat Message
-- User Management
-  - Get User
-  - Get Users
-  - Create User
-  - Update User
-  - Delete User
-  - Change Password
 - Bookmarks
  - Get Bookmarks
  - Create Bookmark
