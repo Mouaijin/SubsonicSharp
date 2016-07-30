@@ -59,6 +59,7 @@
     <Compile Include="BrowsingTests.cs" />
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="InformationListsTests.cs" />
+    <Compile Include="MediaAnnotationTests.cs" />
     <Compile Include="MediaTests.cs" />
     <Compile Include="PlaylistsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

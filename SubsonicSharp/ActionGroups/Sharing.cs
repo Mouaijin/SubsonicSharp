@@ -33,9 +33,7 @@ namespace SubsonicSharp.ActionGroups
             if (!string.IsNullOrEmpty(description)) command.AddParameter("description", description);
             if (expires.HasValue)
                 command.AddParameter("expires",
-                    expires.Value.ToUniversalTime()
-                        .Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))
-                        .TotalMilliseconds.ToString());
+                    expires.Value.ToSecondsFrom1970().ToString());
             return Client.GetResponseXDocument(command).RealRoot().Elements().Select(Share.Create).First();
         }
 
@@ -47,9 +45,7 @@ namespace SubsonicSharp.ActionGroups
             if(!string.IsNullOrEmpty(description)) command.AddParameter("description", description);
             if (expires.HasValue)
                 command.AddParameter("expires",
-                    expires.Value.ToUniversalTime()
-                        .Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))
-                        .TotalMilliseconds.ToString());
+                    expires.Value.ToSecondsFrom1970().ToString());
             return Client.GetResponseXDocument(command).Root.Attribute("status").Value == "ok";
         }
 

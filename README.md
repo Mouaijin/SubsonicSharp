@@ -72,6 +72,11 @@ This may be addressed with platform-specific DI projects in the future (pull req
  - Delete Bookmarks
  - Get Play Queue
  - Save Play Queue
+- Media Annotation
+  - Star
+  - Unstar
+  - Set Rating
+  - Scrobble
 
 ###Incomplete
 
@@ -85,11 +90,6 @@ This may be addressed with platform-specific DI projects in the future (pull req
   - HLS
   - Get Captions
   - Get Avatar
-- Media Annotation
-  - Star
-  - Unstar
-  - Set Rating
-  - Scrobble
 - Podcast
   - Get Podcasts
   - Get Newest Podcasts

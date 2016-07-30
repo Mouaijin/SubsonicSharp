@@ -40,8 +40,8 @@ namespace SubsonicSharp
 
         public static string DescendantValueOrNull(this XElement xml, string elementName)
         {
-            return xml.Elements().Any(x => x.Name.LocalName == elementName) 
-                ? xml.Elements().First(x => x.Name.LocalName == elementName).Value 
+            return xml.Elements().Any(x => x.Name.LocalName == elementName)
+                ? xml.Elements().First(x => x.Name.LocalName == elementName).Value
                 : null;
         }
 
@@ -64,7 +64,7 @@ namespace SubsonicSharp
         {
             return xml.Elements().Where(x => x.Name.LocalName == "artist"
                                              || x.Name.LocalName == "similarArtist")
-                                 .Select(Artist.Create);
+                .Select(Artist.Create);
         }
 
         public static IEnumerable<Album> EnumerateAlbums(this XElement xml)
@@ -114,6 +114,13 @@ namespace SubsonicSharp
         public static XElement RealRoot(this XDocument doc)
         {
             return doc.Root.Elements().First();
+        }
+
+        public static long ToSecondsFrom1970(this DateTime time)
+        {
+            return (long) time.ToUniversalTime()
+                .Subtract(new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc))
+                .TotalMilliseconds;
         }
     }
 }
