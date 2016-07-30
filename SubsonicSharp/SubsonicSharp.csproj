@@ -40,6 +40,7 @@
     <Compile Include="ActionGroups\ClientBrowser.cs" />
     <Compile Include="ActionGroups\InformationLists.cs" />
     <Compile Include="ActionGroups\MediaRetrieval.cs" />
+    <Compile Include="ActionGroups\Podcasts.cs" />
     <Compile Include="ActionGroups\Search.cs" />
     <Compile Include="ActionGroups\Sharing.cs" />
     <Compile Include="ActionGroups\UserManagement.cs" />
@@ -63,6 +64,8 @@
     <Compile Include="SubTypes\NowPlaying.cs" />
     <Compile Include="SubTypes\Playlist.cs" />
     <Compile Include="SubTypes\PlayQueue.cs" />
+    <Compile Include="SubTypes\PodcastChannel.cs" />
+    <Compile Include="SubTypes\PodcastEpisode.cs" />
     <Compile Include="SubTypes\SearchResult.cs" />
     <Compile Include="SubTypes\Share.cs" />
     <Compile Include="SubTypes\User.cs" />

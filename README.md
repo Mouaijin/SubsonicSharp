@@ -77,6 +77,14 @@ This may be addressed with platform-specific DI projects in the future (pull req
   - Unstar
   - Set Rating
   - Scrobble
+- Podcast
+  - Get Podcasts
+  - Get Newest Podcasts
+  - Refresh Podcasts
+  - Create Podcast Channel
+  - Delete Podcast Channel
+  - Delete Podcast Episode
+  - Download Podcast Episode
 
 ###Incomplete
 
@@ -90,14 +98,6 @@ This may be addressed with platform-specific DI projects in the future (pull req
   - HLS
   - Get Captions
   - Get Avatar
-- Podcast
-  - Get Podcasts
-  - Get Newest Podcasts
-  - Refresh Podcasts
-  - Create Podcast Channel
-  - Delete Podcast Channel
-  - Delete Podcast Episode
-  - Download Podcast Episode
 - Jukebox
   - Jukebox Control
 - Chat

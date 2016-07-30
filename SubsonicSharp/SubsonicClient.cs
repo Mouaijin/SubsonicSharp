@@ -24,6 +24,7 @@ namespace SubsonicSharp
         public Bookmarks Bookmarks { get; set; }
         public MediaAnnotation MediaAnnotation { get; set; }
         public Playlists Playlists { get; set; }
+        public Podcasts Podcasts { get; set; }
 
         public SubsonicClient(string username, string password, string address, int port = 4040)
             : this(new UserToken(username, password), new ServerInfo(address, port))
@@ -43,6 +44,7 @@ namespace SubsonicSharp
             Bookmarks = new Bookmarks(this);
             MediaAnnotation = new MediaAnnotation(this);
             Playlists = new Playlists(this);
+            Podcasts = new Podcasts(this);
         }
 
         public string FormatCommand(RestCommand command)

@@ -62,6 +62,7 @@
     <Compile Include="MediaAnnotationTests.cs" />
     <Compile Include="MediaTests.cs" />
     <Compile Include="PlaylistsTests.cs" />
+    <Compile Include="PodcastTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchTests.cs" />
     <Compile Include="SharingTests.cs" />
