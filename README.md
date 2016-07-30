@@ -85,6 +85,9 @@ This may be addressed with platform-specific DI projects in the future (pull req
   - Delete Podcast Channel
   - Delete Podcast Episode
   - Download Podcast Episode
+- Chat
+  - Get Chat Messages
+  - Add Chat Message
 
 ###Incomplete
 
@@ -100,6 +103,3 @@ This may be addressed with platform-specific DI projects in the future (pull req
   - Get Avatar
 - Jukebox
   - Jukebox Control
-- Chat
-  - Get Chat Messages
-  - Add Chat Message

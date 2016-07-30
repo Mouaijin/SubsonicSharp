@@ -57,6 +57,7 @@
   <ItemGroup>
     <Compile Include="BookmarksTests.cs" />
     <Compile Include="BrowsingTests.cs" />
+    <Compile Include="ChatTests.cs" />
     <Compile Include="ConnectionTests.cs" />
     <Compile Include="InformationListsTests.cs" />
     <Compile Include="MediaAnnotationTests.cs" />

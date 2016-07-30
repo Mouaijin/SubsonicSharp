@@ -35,6 +35,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ActionGroups\Bookmarks.cs" />
+    <Compile Include="ActionGroups\Chat.cs" />
     <Compile Include="ActionGroups\MediaAnnotation.cs" />
     <Compile Include="ActionGroups\Playlists.cs" />
     <Compile Include="ActionGroups\ClientBrowser.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="SubTypes\Artist.cs" />
     <Compile Include="SubTypes\ArtistInfo.cs" />
     <Compile Include="SubTypes\Bookmark.cs" />
+    <Compile Include="SubTypes\ChatMessage.cs" />
     <Compile Include="SubTypes\Child.cs" />
     <Compile Include="SubTypes\Directory.cs" />
     <Compile Include="SubTypes\Genre.cs" />
