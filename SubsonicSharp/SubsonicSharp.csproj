@@ -61,6 +61,8 @@
     <Compile Include="SubTypes\Directory.cs" />
     <Compile Include="SubTypes\Genre.cs" />
     <Compile Include="SubTypes\IndexesCollection.cs" />
+    <Compile Include="SubTypes\JukeboxPlaylist.cs" />
+    <Compile Include="SubTypes\JukeboxStatus.cs" />
     <Compile Include="SubTypes\License.cs" />
     <Compile Include="SubTypes\Lyrics.cs" />
     <Compile Include="SubTypes\NowPlaying.cs" />

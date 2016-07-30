@@ -111,5 +111,107 @@ namespace SubsonicSharp
         }
 
         #endregion System
+
+        #region Jukebox
+
+        public JukeboxPlaylist GetJukeboxPlaylist()
+        {
+            RestCommand command = new RestCommand();
+            command.MethodName = "jukeboxControl";
+            command.AddParameter("action", "get");
+            return JukeboxPlaylist.Create(GetResponseXDocument(command).RealRoot());
+        }
+
+        public JukeboxStatus JukeboxStats()
+        {
+            RestCommand command = new RestCommand();
+            command.MethodName = "jukeboxControl";
+            command.AddParameter("action","status");
+            return JukeboxStatus.Create(GetResponseXDocument(command).RealRoot());
+        }
+
+        public JukeboxStatus JukeboxSkip(int id = -1, long offset = -1)
+        {
+            RestCommand command = new RestCommand();
+            command.MethodName = "jukeboxControl";
+            command.AddParameter("action", "skip");
+            if(id != -1) command.AddParameter("id", id);
+            if(offset != -1) command.AddParameter("offset", offset.ToString());
+            return JukeboxStatus.Create(GetResponseXDocument(command).RealRoot());
+
+        }
+        public JukeboxStatus JukeboxRemove(int id)
+        {
+            RestCommand command = new RestCommand();
+            command.MethodName = "jukeboxControl";
+            command.AddParameter("action", "remove");
+            command.AddParameter("id", id);
+            return JukeboxStatus.Create(GetResponseXDocument(command).RealRoot());
+
+        }
+        public JukeboxStatus JukeboxClear()
+        {
+            RestCommand command = new RestCommand();
+            command.MethodName = "jukeboxControl";
+            command.AddParameter("action", "clear");
+            return JukeboxStatus.Create(GetResponseXDocument(command).RealRoot());
+
+        }
+        public JukeboxStatus JukeboxSet(int id)
+        {
+            RestCommand command = new RestCommand();
+            command.MethodName = "jukeboxControl";
+            command.AddParameter("action", "set");
+            command.AddParameter("id", id);
+            return JukeboxStatus.Create(GetResponseXDocument(command).RealRoot());
+
+        }
+        public JukeboxStatus JukeboxStart()
+        {
+            RestCommand command = new RestCommand();
+            command.MethodName = "jukeboxControl";
+            command.AddParameter("action", "start");
+            return JukeboxStatus.Create(GetResponseXDocument(command).RealRoot());
+
+        }
+        public JukeboxStatus JukeboxStop()
+        {
+            RestCommand command = new RestCommand();
+            command.MethodName = "jukeboxControl";
+            command.AddParameter("action", "stop");
+            return JukeboxStatus.Create(GetResponseXDocument(command).RealRoot());
+
+        }
+        public JukeboxStatus JukeboxAdd(int id)
+        {
+            RestCommand command = new RestCommand();
+            command.MethodName = "jukeboxControl";
+            command.AddParameter("action", "add");
+            command.AddParameter("id", id);
+            return JukeboxStatus.Create(GetResponseXDocument(command).RealRoot());
+
+        }
+        public JukeboxStatus JukeboxShuffle()
+        {
+            RestCommand command = new RestCommand();
+            command.MethodName = "jukeboxControl";
+            command.AddParameter("action", "shuffle");
+            return JukeboxStatus.Create(GetResponseXDocument(command).RealRoot());
+
+        }
+        public JukeboxStatus JukeboxSetGain(float gain)
+        {
+            RestCommand command = new RestCommand();
+            command.MethodName = "jukeboxControl";
+            command.AddParameter("action", "setGain");
+            command.AddParameter("gain", gain.ToString());
+            return JukeboxStatus.Create(GetResponseXDocument(command).RealRoot());
+
+        }
+
+
+
+
+        #endregion Jukebox
     }
 }
