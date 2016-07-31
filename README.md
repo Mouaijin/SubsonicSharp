@@ -6,6 +6,13 @@ PCL for accessing the Subsonic Music Server API in .NET without actually using t
 2. Create a completely portable library for development of Subsonic clients on any device
 3. Lower the barrier to entry drastically for use of the API
 
+##Installation
+You can build and include this binary manually, or retrieve the package using nuget: 
+[SubsonicSharp.PCL](https://www.nuget.org/packages/SubsonicSharp.PCL)
+
+##Use
+Create a `SubsonicClient` object from the main package by passing in user and server information strings, and then call the methods needed as listed [in the official API documentation](http://www.subsonic.org/pages/api.jsp). These methods are sometimes grouped into property classes according to function groups defined in the API specification, such as `MediaRetrieval` or `ClientBrowser`. More information on use and syntax can be found in the test files for the project.
+
 ####Media Retrieval Note
 This library currently supports passing the URL string needed to stream or download files, but does not pass the data itself.
 This may be addressed with platform-specific DI projects in the future (pull requests welcome), but due to the differences in how each platform handles media retrieval, this is a secondary goal.
