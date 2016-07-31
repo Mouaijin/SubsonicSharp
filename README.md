@@ -88,6 +88,8 @@ This may be addressed with platform-specific DI projects in the future (pull req
 - Chat
   - Get Chat Messages
   - Add Chat Message
+- Jukebox
+  - Jukebox Control
 
 ###Incomplete
 
@@ -101,5 +103,3 @@ This may be addressed with platform-specific DI projects in the future (pull req
   - HLS
   - Get Captions
   - Get Avatar
-- Jukebox
-  - Jukebox Control

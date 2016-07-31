@@ -20,31 +20,48 @@ namespace SubsonicSharp.ActionGroups
 
         #region Public Methods
 
+        /// <summary>
+        /// Returns all configured top-level music folders. Takes no extra parameters.
+        /// </summary>
+        /// <returns>A collection of BasicItem objects representing names and IDs of all music folders</returns>
         public IEnumerable<BasicItem> GetMusicFolders()
         {
-            RestCommand command = new RestCommand { MethodName = "getMusicFolders" };
+            RestCommand command = new RestCommand {MethodName = "getMusicFolders"};
             XDocument document = Client.GetResponseXDocument(command);
             return GetMusicFolders(document);
         }
 
+        /// <summary>
+        /// Returns an indexed structure of all artists.
+        /// </summary>
+        /// <returns>An IndexesCollection object with information about all indexes</returns>
         public IndexesCollection GetIndexes()
         {
-            RestCommand command = new RestCommand { MethodName = "getIndexes" };
+            RestCommand command = new RestCommand {MethodName = "getIndexes"};
             XDocument document = Client.GetResponseXDocument(command);
             return GetIndexes(document);
         }
 
+        /// <summary>
+        /// Returns a listing of all files in a music directory. Typically used to get list of albums for an artist, or list of songs for an album.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>A Directory object with information about the requested directory</returns>
         public Directory GetMusicDirectory(int id)
         {
             RestCommand command = new RestCommand
             {
                 MethodName = "getMusicDirectory",
-                Parameters = { new RestParameter { Parameter = "id", Value = id.ToString() } }
+                Parameters = {new RestParameter {Parameter = "id", Value = id.ToString()}}
             };
             XDocument document = Client.GetResponseXDocument(command);
             return GetMusicDirectory(document);
         }
 
+        /// <summary>
+        /// Returns all genres. 
+        /// </summary>
+        /// <returns>A collection of Genre objects for all genres in system</returns>
         public IEnumerable<Genre> GetGenres()
         {
             RestCommand command = new RestCommand
@@ -55,6 +72,10 @@ namespace SubsonicSharp.ActionGroups
             return GetGenres(document);
         }
 
+        /// <summary>
+        /// Similar to getIndexes, but organizes music according to ID3 tags. 
+        /// </summary>
+        /// <returns>A Dictionary of Artist objects organized by alphabetic index</returns>
         public Dictionary<string, IEnumerable<Artist>> GetArtists()
         {
             RestCommand command = new RestCommand
@@ -65,39 +86,58 @@ namespace SubsonicSharp.ActionGroups
             return GetArtists(document);
         }
 
+        /// <summary>
+        /// Returns details for an artist, including a list of albums. This method organizes music according to ID3 tags. 
+        /// </summary>
+        /// <param name="id">The artist ID.</param>
+        /// <returns>An Artist object for the requested artist</returns>
         public Artist GetArtist(int id)
         {
             RestCommand command = new RestCommand
             {
                 MethodName = "getArtist",
-                Parameters = { new RestParameter { Parameter = "id", Value = id.ToString() } }
+                Parameters = {new RestParameter {Parameter = "id", Value = id.ToString()}}
             };
             XDocument document = Client.GetResponseXDocument(command);
             return GetArtist(document);
         }
 
+        /// <summary>
+        /// Returns details for an album, including a list of songs. This method organizes music according to ID3 tags. 
+        /// </summary>
+        /// <param name="id">The album ID.</param>
+        /// <returns>An Album object for the request album</returns>
         public Album GetAlbum(int id)
         {
             RestCommand command = new RestCommand
             {
                 MethodName = "getAlbum",
-                Parameters = { new RestParameter { Parameter = "id", Value = id.ToString() } }
+                Parameters = {new RestParameter {Parameter = "id", Value = id.ToString()}}
             };
             XDocument document = Client.GetResponseXDocument(command);
             return GetAlbum(document);
         }
 
+        /// <summary>
+        /// Returns details for a song. 
+        /// </summary>
+        /// <param name="id">The song ID.</param>
+        /// <returns>A Child object for the requested song</returns>
         public Child GetSong(int id)
         {
             RestCommand command = new RestCommand
             {
                 MethodName = "getSong",
-                Parameters = { new RestParameter { Parameter = "id", Value = id.ToString() } }
+                Parameters = {new RestParameter {Parameter = "id", Value = id.ToString()}}
             };
             XDocument document = Client.GetResponseXDocument(command);
             return GetSong(document);
         }
 
+        /// <summary>
+        /// Returns all video files. 
+        /// </summary>
+        /// <returns>A collection of Child objects for all videos in system</returns>
         public IEnumerable<Child> GetVideos()
         {
             RestCommand command = new RestCommand
@@ -108,6 +148,13 @@ namespace SubsonicSharp.ActionGroups
             return GetVideos(document);
         }
 
+        /// <summary>
+        /// Returns artist info with biography, image URLs and similar artists, using data from last.fm. 
+        /// </summary>
+        /// <param name="id">The artist, album or song ID.</param>
+        /// <param name="count">Max number of similar artists to return.</param>
+        /// <param name="includeNotPresent">Whether to return artists that are not present in the media library.</param>
+        /// <returns>An ArtistInfo object for the specified artist</returns>
         public ArtistInfo GetArtistInfo(int id, int count = 20, bool includeNotPresent = false)
         {
             RestCommand command = new RestCommand
@@ -124,6 +171,13 @@ namespace SubsonicSharp.ActionGroups
             return GetArtistInfo(document);
         }
 
+        /// <summary>
+        ///Similar to getArtistInfo, but organizes music according to ID3 tags.  
+        /// </summary>
+        /// <param name="id">The artist, album or song ID.</param>
+        /// <param name="count">Max number of similar artists to return.</param>
+        /// <param name="includeNotPresent">Whether to return artists that are not present in the media library.</param>
+        /// <returns>An ArtistInfo object for the specified artist</returns>
         public ArtistInfo GetArtistInfo2(int id, int count = 20, bool includeNotPresent = false)
         {
             RestCommand command = new RestCommand
@@ -140,6 +194,12 @@ namespace SubsonicSharp.ActionGroups
             return GetArtistInfo(document);
         }
 
+        /// <summary>
+        ///Returns a random collection of songs from the given artist and similar artists, using data from last.fm. Typically used for artist radio features.  
+        /// </summary>
+        /// <param name="id">The artist, album or song ID.</param>
+        /// <param name="count">Max number of songs to return.</param>
+        /// <returns>A collection of Child objects for similar songs</returns>
         public IEnumerable<Child> GetSimilarSongs(int id, int count = 50)
         {
             RestCommand command = new RestCommand
@@ -155,6 +215,12 @@ namespace SubsonicSharp.ActionGroups
             return GetSimilarSongs(document);
         }
 
+        /// <summary>
+        ///Similar to getSimilarSongs, but organizes music according to ID3 tags.  
+        /// </summary>
+        /// <param name="id">The artist, album or song ID.</param>
+        /// <param name="count">Max number of songs to return.</param>
+        /// <returns>A collection of Child objects for similar songs</returns>
         public IEnumerable<Child> GetSimilarSongs2(int id, int count = 50)
         {
             RestCommand command = new RestCommand
@@ -170,6 +236,12 @@ namespace SubsonicSharp.ActionGroups
             return GetSimilarSongs(document);
         }
 
+        /// <summary>
+        ///Returns top songs for the given artist, using data from last.fm.  
+        /// </summary>
+        /// <param name="artistName">The artist name.</param>
+        /// <param name="count">Max number of songs to return.</param>
+        /// <returns>A collection of Child objects representing the top songs</returns>
         public IEnumerable<Child> GetTopSongs(string artistName, int count = 50)
         {
             RestCommand command = new RestCommand
