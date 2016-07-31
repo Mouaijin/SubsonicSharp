@@ -53,6 +53,7 @@
     <Compile Include="SubsonicClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SubTypes\Album.cs" />
+    <Compile Include="SubTypes\AlbumInfo.cs" />
     <Compile Include="SubTypes\Artist.cs" />
     <Compile Include="SubTypes\ArtistInfo.cs" />
     <Compile Include="SubTypes\Bookmark.cs" />
@@ -73,6 +74,7 @@
     <Compile Include="SubTypes\SearchResult.cs" />
     <Compile Include="SubTypes\Share.cs" />
     <Compile Include="SubTypes\User.cs" />
+    <Compile Include="SubTypes\VideoInfo.cs" />
     <Compile Include="UserToken.cs" />
     <Compile Include="ExtensionMethods.cs" />
   </ItemGroup>

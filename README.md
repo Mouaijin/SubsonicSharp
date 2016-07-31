@@ -27,16 +27,22 @@ This may be addressed with platform-specific DI projects in the future (pull req
   - Get Album
   - Get Song
   - Get Videos
+  - Get Album Info (1.14+)
+  - Get Album Info 2 (1.14+)
   - Get Artist Info
   - Get Artist Info 2
   - Get Similar Songs
   - Get Similar Songs 2
   - Get Top Songs
+  - Get Video Info (1.14+)
 - Media Retrieval
   - Stream
   - Download
+  - HLS
   - Get Cover Art
   - Get Lyrics
+  - Get Captions
+  - Get Avatar
 - Album/Song List
   - Get Album List
   - Get Album List 2
@@ -93,13 +99,5 @@ This may be addressed with platform-specific DI projects in the future (pull req
 
 ###Incomplete
 
-- Browsing
-  - Get Video Info (1.14+)
-  - Get Album Info (1.14+)
-  - Get Album Info 2 (1.14+)
 - Searching
   - Search (deprecated in 1.4, will not implement)
-- Media Retrieval
-  - HLS
-  - Get Captions
-  - Get Avatar

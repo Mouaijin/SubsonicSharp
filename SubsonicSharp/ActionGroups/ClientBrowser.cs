@@ -149,6 +149,44 @@ namespace SubsonicSharp.ActionGroups
         }
 
         /// <summary>
+        /// Returns album notes, image URLs etc, using data from last.fm.
+        /// </summary>
+        /// <param name="id">The album or song ID.</param>
+        /// <returns>An AlbumInfo object with data from last.fm</returns>
+        public AlbumInfo GetAlbumInfo(int id)
+        {
+            RestCommand command = new RestCommand();
+            command.MethodName = "getAlbumInfo";
+            command.AddParameter("id", id);
+            return AlbumInfo.Create(Client.GetResponseXDocument(command).RealRoot());
+        }
+        /// <summary>
+        /// Returns album notes, image URLs etc, using data from last.fm, organized by ID3 tags.
+        /// </summary>
+        /// <param name="id">The album ID.</param>
+        /// <returns>An AlbumInfo object with data from last.fm</returns>
+        public AlbumInfo GetAlbumInfo2(int id)
+        {
+            RestCommand command = new RestCommand();
+            command.MethodName = "getAlbumInfo";
+            command.AddParameter("id", id);
+            return AlbumInfo.Create(Client.GetResponseXDocument(command).RealRoot());
+        }
+
+        /// <summary>
+        /// Returns details for a video, including information about available audio tracks, subtitles (captions) and conversions. 
+        /// </summary>
+        /// <param name="id">The video ID.</param>
+        /// <returns>A VideoInfo object with information about the requested video</returns>
+        public VideoInfo GetVideoInfo(int id)
+        {
+            RestCommand command = new RestCommand();
+            command.MethodName = "getVideoInfo";
+            command.AddParameter("id", id);
+            return VideoInfo.Create(Client.GetResponseXDocument(command).RealRoot());
+        }
+
+        /// <summary>
         /// Returns artist info with biography, image URLs and similar artists, using data from last.fm. 
         /// </summary>
         /// <param name="id">The artist, album or song ID.</param>
