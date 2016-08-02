@@ -76,14 +76,30 @@ namespace SubsonicSharp.ActionGroups
         /// Similar to getIndexes, but organizes music according to ID3 tags. 
         /// </summary>
         /// <returns>A Dictionary of Artist objects organized by alphabetic index</returns>
-        public Dictionary<string, IEnumerable<Artist>> GetArtists()
+        public Dictionary<string, IEnumerable<Artist>> GetArtists(int musicFolderId = -1)
         {
             RestCommand command = new RestCommand
             {
                 MethodName = "getArtists"
             };
+            if(musicFolderId != -1) command.AddParameter("musicFolderId", musicFolderId);
             XDocument document = Client.GetResponseXDocument(command);
             return GetArtists(document);
+        }
+
+        /// <summary>
+        /// Same as GetArtists, but as an ungrouped collection
+        /// </summary>
+        /// <returns>An enumerable collection of all Artists</returns>
+        public IEnumerable<Artist> GetArtistsUngrouped(int musicFolderId = -1)
+        {
+            foreach (KeyValuePair<string, IEnumerable<Artist>> pair in GetArtists(musicFolderId))
+            {
+                foreach (Artist artist in pair.Value)
+                {
+                    yield return artist;
+                }
+            }
         }
 
         /// <summary>
