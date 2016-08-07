@@ -17,7 +17,8 @@ namespace SubsonicSharp.SubTypes
 
         public static Artist Create(XElement xml)
         {
-            return new Artist
+
+            Artist artist = new Artist
             {
                 Id = Convert.ToInt32(xml.Attribute("id").Value),
                 Name = xml.Attribute("name").Value,
@@ -26,8 +27,9 @@ namespace SubsonicSharp.SubTypes
                 AverageRating = xml.IntAttributeOrNull("averageRating"),
                 AlbumCount = xml.IntAttributeOrNull("albumCount"),
                 Starred = xml.DateTimeAttributeOrNull("starred"),
-                Albums = xml.EnumerateAlbums()
+                Albums = xml.Elements().Where(x => x.Name.LocalName == "album").Select(Album.Create)
             };
+            return artist;
         }
     }
 }

@@ -119,6 +119,34 @@ namespace SubsonicSharp.ActionGroups
         }
 
         /// <summary>
+        /// Returns a collection of all albums on the server, or in a specific folder
+        /// </summary>
+        /// <param name="musicFolderId">The directory to get albums for. Leave blank for all folders.</param>
+        /// <returns>A collection of Album objects</returns>
+        public IEnumerable<Album> GetAllAlbums(int musicFolderId = -1)
+        {
+            int offset = 0;
+            bool empty = false;
+            while (!empty)
+            {
+
+                IEnumerable<Album> albums = Client.InformationLists.GetAlbumList(ListOrdering.AlphabeticalByName, 500,
+                    offset, musicFolderId: musicFolderId);
+                if (!albums.Any())
+                    empty = true;
+                else
+                {
+                    foreach (Album album in albums)
+                    {
+                        yield return album;
+                    }
+                    offset += 500;
+                }
+            }
+
+        }
+
+        /// <summary>
         /// Returns details for an album, including a list of songs. This method organizes music according to ID3 tags. 
         /// </summary>
         /// <param name="id">The album ID.</param>

@@ -95,6 +95,13 @@ namespace Tests
         }
 
         [TestMethod]
+        public void GetAllAlbumsTest()
+        {
+            List<Album> albums = Client.Browsing.GetAllAlbums().ToList();
+            Assert.IsTrue(albums.Any());
+        }
+
+        [TestMethod]
         public void GetAlbumTest()
         {
             XDocument xDoc = XDocument.Load("TestData/album_example_1.xml");
