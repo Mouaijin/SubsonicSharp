@@ -27,8 +27,8 @@ namespace SubsonicSharp
         public Podcasts Podcasts { get; set; }
         public Chat Chat { get; set; }
 
-        public SubsonicClient(string username, string password, string address, int port = 4040)
-            : this(new UserToken(username, password), new ServerInfo(address, port))
+        public SubsonicClient(string username, string password, string address, int port = 4040, string basepath = "", ServerInfo.Protocol protocol = ServerInfo.Protocol.Http)
+            : this(new UserToken(username, password), new ServerInfo(address, port, basepath, protocol))
         {
         }
 

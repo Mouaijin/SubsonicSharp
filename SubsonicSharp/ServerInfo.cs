@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SubsonicSharp
+﻿namespace SubsonicSharp
 {
     public class ServerInfo
     {
@@ -27,21 +25,5 @@ namespace SubsonicSharp
         public string BaseUrl() => $"{ConnectionProtocol.ToFriendlyString()}{Host}:{Port}{Basepath}";
 
         public string VersionString() => $"v=1.{ApiVersion}";
-    }
-
-    public static class ServerInfoExtensions
-    {
-        public static string ToFriendlyString(this ServerInfo.Protocol me)
-        {
-            switch (me)
-            {
-                case ServerInfo.Protocol.Http:
-                    return "http://";
-                case ServerInfo.Protocol.Https:
-                    return "https://";
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(me), me, null);
-            }
-        }
     }
 }
