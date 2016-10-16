@@ -2,17 +2,27 @@
 {
     public class ServerInfo
     {
-        public string Address { get; set; } //string to account to allow for hostname access without IP
+        public string Host { get; set; } //string to allow for hostname access without IP
         public int Port { get; set; } //Default port for HTTP is 4040
-        public int ApiVersion { get; set; } = 13; //Support for later versions to be addressed later
+        public string Basepath { get; set; } //Basepath, for example /ampache/
+        public int ApiVersion { get; set; } = 11; //Support for later versions to be addressed later
+        public Protocol ConnectionProtocol { get; set; } // HTTP/HTTPS protocol, default is HTTP
 
-        public ServerInfo(string address, int port = 4040)
+        public enum Protocol
         {
-            Address = address;
-            Port = port;
+            Http,
+            Https
         }
 
-        public string BaseUrl() => $"http://{Address}:{Port}";
+        public ServerInfo(string host, int port = 4040, string basepath = "", Protocol protocol = Protocol.Http)
+        {
+            Host = host;
+            Port = port;
+            Basepath = basepath;
+            ConnectionProtocol = protocol;
+        }
+
+        public string BaseUrl() => $"{ConnectionProtocol.ToFriendlyString()}{Host}:{Port}{Basepath}";
 
         public string VersionString() => $"v=1.{ApiVersion}";
     }

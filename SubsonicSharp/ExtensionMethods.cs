@@ -127,5 +127,18 @@ namespace SubsonicSharp
         {
             return new DateTime(1970,1,1,0,0,0,DateTimeKind.Utc).AddMilliseconds(time);
         }
+
+        public static string ToFriendlyString(this ServerInfo.Protocol me)
+        {
+            switch (me)
+            {
+                case ServerInfo.Protocol.Http:
+                    return "http://";
+                case ServerInfo.Protocol.Https:
+                    return "https://";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(me), me, null);
+            }
+        }
     }
 }
