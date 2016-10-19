@@ -19,13 +19,13 @@
   <Import Project="$(NuProjPath)\NuProj.props" Condition="Exists('$(NuProjPath)\NuProj.props')" />
   <PropertyGroup Label="Configuration">
     <Id>SubsonicSharp.PCL</Id>
-    <Version>0.4.2</Version>
+    <Version>0.5</Version>
     <Title>SubsonicSharp PCL</Title>
     <Authors>Mouaijin</Authors>
     <Owners>Mouaijin</Owners>
     <Summary>PCL for accessing the Subsonic Music Server API in .NET without actually using the REST API</Summary>
     <Description>PCL for accessing the Subsonic Music Server API in .NET without actually using the REST API</Description>
-    <ReleaseNotes>Added method for getting all albums, similar to getArtists</ReleaseNotes>
+    <ReleaseNotes>BasePath, and HTTPS now supported. User-specified Api Level now available, with Exceptions/Attributes added to all API callers to detect version mismatches early.</ReleaseNotes>
     <ProjectUrl>https://github.com/Mouaijin/SubsonicSharp</ProjectUrl>
     <LicenseUrl>
     </LicenseUrl>

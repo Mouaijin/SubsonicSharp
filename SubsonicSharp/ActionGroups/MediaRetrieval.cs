@@ -26,6 +26,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="format">Specifies the preferred target format (e.g., "mp3" or "flv") in case there are multiple applicable transcodings. Starting with 1.9.0 you can use the special value "raw" to disable transcoding. </param>
         /// <param name="estimateContentLength">If set to "true", the Content-Length HTTP header will be set to an estimated value for transcoded or downsampled media. </param>
         /// <returns>HTTP address string used for streaming this file</returns>
+        [ApiLevel(0)]
         public string GetStreamingAddress(int id, int maxBitRate = 0, string format = null,
             bool estimateContentLength = false, bool converted = false)
         {
@@ -53,6 +54,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="id">A string which uniquely identifies the file to download. Obtained by calls to GetMusicDirectory.</param>
         /// <returns>HTTP address string used for downloading this file</returns>
+        [ApiLevel(0)]
         public string GetDownloadAddress(int id)
         {
             RestCommand command = new RestCommand
@@ -72,6 +74,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="width">Since 1.9.0 you may explicitly request a certain width (480) and height (360)</param>
         /// <param name="audioTrack"> 	The ID of the audio track to use. See getVideoInfo for how to get the list of available audio tracks for a video. </param>
         /// <returns>An HTTP address string used to access the playlist</returns>
+        [ApiLevel(8)]
         public string Hls(int id, int bitRate = -1, int height = -1, int width = -1, int audioTrack = -1)
         {
             RestCommand command = new RestCommand();
@@ -99,6 +102,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="id">The ID of a song, album or artist.</param>
         /// <param name="size">If specified, scale image to this size.</param>
         /// <returns>A binary array of image data</returns>
+        [ApiLevel(0)]
         public byte[] GetCovertArt(int id, int size = -1)
         {
             return GetCovertArtAsync(id, size).Result;
@@ -110,6 +114,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="id">The ID of a song, album or artist.</param>
         /// <param name="size">If specified, scale image to this size.</param>
         /// <returns>A binary array of image data</returns>
+        [ApiLevel(0)]
         public Task<byte[]> GetCovertArtAsync(int id, int size = -1)
         {
             RestCommand command = new RestCommand
@@ -137,6 +142,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="artist">The artist name</param>
         /// <param name="title">The song title</param>
         /// <returns>A Lyrics object containing the returned lyrics text</returns>
+        [ApiLevel(2)]
         public Lyrics GetLyrics(string artist = null, string title = null)
         {
             if (artist == null && title == null)
@@ -157,6 +163,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="id"> 	The ID of the video.</param>
         /// <param name="format">Preferred captions format ("srt" or "vtt").</param>
         /// <returns>A Url string used to retrieve requested subtitle data</returns>
+        [ApiLevel(14)]
         public string GetCaptions(int id, string format = null)
         {
             RestCommand command = new RestCommand();
@@ -171,6 +178,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="username">The user in question.</param>
         /// <returns>A binary array of image data</returns>
+        [ApiLevel(8)]
         public byte[] GetAvatar(string username)
         {
             return GetAvatarAsync(username).Result;
@@ -180,6 +188,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="username">The user in question.</param>
         /// <returns>A binary array of image data</returns>
+        [ApiLevel(8)]
         public Task<byte[]> GetAvatarAsync(string username)
         {
             RestCommand command = new RestCommand();

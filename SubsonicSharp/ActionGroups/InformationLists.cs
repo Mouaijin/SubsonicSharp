@@ -28,6 +28,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="genre">The name of the genre, e.g., "Rock".</param>
         /// <param name="musicFolderId">Only return results from the music folder with the given ID. See GetMusicFolders.</param>
         /// <returns>A list of albums matching specified options</returns>
+        [ApiLevel(2)]
         public IEnumerable<Album> GetAlbumList(ListOrdering type, int size = 10, int offset = 0, int fromYear = -1,
             int toYear = -1, string genre = null, int musicFolderId = -1)
         {
@@ -60,6 +61,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="genre">The name of the genre, e.g., "Rock".</param>
         /// <param name="musicFolderId">Only return results from the music folder with the given ID. See GetMusicFolders.</param>
         /// <returns>A list of albums matching specified options</returns>
+        [ApiLevel(8)]
         public IEnumerable<Album> GetAlbumList2(ListOrdering type, int size = 10, int offset = 0, int fromYear = -1,
             int toYear = -1, string genre = null, int musicFolderId = -1)
         {
@@ -87,6 +89,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="toYear">Only return songs published before or in this year.</param>
         /// <param name="musicFolderId">Only return results from the music folder with the given ID. See GetMusicFolders.</param>
         /// <returns>A random list of songs matching specified options</returns>
+        [ApiLevel(2)]
         public IEnumerable<Child> GetRandomSongs(int size = 10, string genre = null, int fromYear = -1, int toYear = -1,
             int musicFolderId = -1)
         {
@@ -108,6 +111,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="offset">The offset. Useful if you want to page through the songs in a genre.</param>
         /// <param name="musicFolderId">Only return results from the music folder with the given ID. See GetMusicFolders.</param>
         /// <returns>A list of songs belonging to the specified genre</returns>
+        [ApiLevel(9)]
         public IEnumerable<Child> GetSongsByGenre(string genre, int count = 10, int offset = 0, int musicFolderId = -1)
         {
             RestCommand command = new RestCommand();
@@ -123,6 +127,7 @@ namespace SubsonicSharp.ActionGroups
         /// Returns what is currently being played by all users. Takes no extra parameters. 
         /// </summary>
         /// <returns>A list of NowPlaying objects- a song with info about its user and player</returns>
+        [ApiLevel(0)]
         public IEnumerable<NowPlaying> GetNowPlaying()
         {
             return
@@ -138,6 +143,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="musicFolderId">Only return results from the music folder with the given ID. See GetMusicFolders.</param>
         /// <returns>A SearchResult containing lists of starred Albums, Artists, and Songs</returns>
+        [ApiLevel(8)]
         public SearchResult GetStarred(int musicFolderId = -1)
         {
             RestCommand command = new RestCommand();
@@ -151,6 +157,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="musicFolderId">Only return results from the music folder with the given ID. See GetMusicFolders.</param>
         /// <returns>A SearchResult containing lists of starred Albums, Artists, and Songs</returns>
+        [ApiLevel(8)]
         public SearchResult GetStarred2(int musicFolderId = -1)
         {
             RestCommand command = new RestCommand();

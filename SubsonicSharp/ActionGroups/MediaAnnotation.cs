@@ -20,6 +20,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="ids">The ID of the file (song) or folder (album/artist) to star. Multiple parameters allowed.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(8)]
         public bool Star(IEnumerable<int> ids)
         {
             RestCommand command = new RestCommand();
@@ -36,6 +37,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="ids">The ID of the file (song) or folder (album/artist) to star. Multiple parameters allowed.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(8)]
         public bool StarAlbums(IEnumerable<int> ids)
         {
             RestCommand command = new RestCommand();
@@ -52,6 +54,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="ids">The ID of the file (song) or folder (album/artist) to star. Multiple parameters allowed.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(8)]
         public bool StarArtists(IEnumerable<int> ids)
         {
             RestCommand command = new RestCommand();
@@ -68,6 +71,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="ids">The ID of the file (song) or folder (album/artist) to unstar. Multiple parameters allowed.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(8)]
         public bool Unstar(IEnumerable<int> ids)
         {
             RestCommand command = new RestCommand();
@@ -84,6 +88,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="ids">The ID of the file (song) or folder (album/artist) to unstar. Multiple parameters allowed.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(8)]
         public bool UnstarAlbums(IEnumerable<int> ids)
         {
             RestCommand command = new RestCommand();
@@ -100,6 +105,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="ids">The ID of the file (song) or folder (album/artist) to unstar. Multiple parameters allowed.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(8)]
         public bool UnstarArtists(IEnumerable<int> ids)
         {
             RestCommand command = new RestCommand();
@@ -117,6 +123,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="id">A string which uniquely identifies the file (song) or folder (album/artist) to rate.</param>
         /// <param name="rating">The rating between 1 and 5 (inclusive), or 0 to remove the rating.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(6)]
         public bool SetRating(int id, int rating)
         {
             RestCommand command = new RestCommand();
@@ -134,6 +141,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="time">The time at which the song was listened to</param>
         /// <param name="submission">Whether this is a "submission" or a "now playing" notification.</param>
         /// <returns></returns>
+        [ApiLevel(5)]
         public bool Scrobble(int id, DateTime? time = null, bool submission = true)
         {
             RestCommand command = new RestCommand();

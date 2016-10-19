@@ -23,6 +23,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="songOffset">Search result offset for artists. Used for paging.</param>
         /// <param name="musicFolderId">Only return results from the music folder with the given ID. See GetMusicFolders.</param>
         /// <returns>A SearchResult object containg lists of matching songs, artists, and albums</returns>
+        [ApiLevel(4)]
         public SearchResult Search2(string query, int artistCount = 20, int artistOffset = 0, int albumCount = 20,
             int albumOffset = 0, int songCount = 20, int songOffset = 0, int musicFolderId = -1)
         {
@@ -50,6 +51,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="songOffset">Search result offset for artists. Used for paging.</param>
         /// <param name="musicFolderId">Only return results from the music folder with the given ID. See GetMusicFolders.</param>
         /// <returns>A SearchResult object containg lists of matching songs, artists, and albums</returns>
+        [ApiLevel(8)]
         public SearchResult Search3(string query, int artistCount = 20, int artistOffset = 0, int albumCount = 20,
             int albumOffset = 0, int songCount = 20, int songOffset = 0, int musicFolderId = -1)
         {

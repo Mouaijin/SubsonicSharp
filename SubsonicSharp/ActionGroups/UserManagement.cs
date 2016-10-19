@@ -22,6 +22,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="username">The name of the user to retrieve. You can only retrieve your own user unless you have admin privileges. </param>
         /// <returns>A User object with the specified User's information</returns>
+        [ApiLevel(3)]
         public User GetUser(string username)
         {
             RestCommand command = new RestCommand();
@@ -34,6 +35,7 @@ namespace SubsonicSharp.ActionGroups
         /// Get details about all users, including which authorization roles and folder access they have. Only users with admin privileges are allowed to call this method. 
         /// </summary>
         /// <returns>A collection of User objects for all users in the system</returns>
+        [ApiLevel(8)]
         public IEnumerable<User> GetUsers()
         {
             RestCommand command = new RestCommand();
@@ -65,6 +67,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="videoConversionRole">Whether the user is allowed to start video conversions.</param>
         /// <param name="musicFolderIds">IDs of the music folders the user is allowed access to. Include the parameter once for each folder.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(1)]
         public bool CreateUser(string username, string password, string email, bool ldapAuthenticated = false,
             bool adminRole = false, bool settingsRole = false, bool streamRole = false, bool jukeboxRole = false,
             bool downloadRole = false, bool uploadRole = false, bool playlistRole = false, bool coverArtRole = false,
@@ -120,6 +123,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="videoConversionRole">Whether the user is allowed to start video conversions.</param>
         /// <param name="musicFolderIds">IDs of the music folders the user is allowed access to. Include the parameter once for each folder.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(11)]
         public bool UpdateUser(string username, string password = null, string email = null,
             bool ldapAuthenticated = false,
             bool adminRole = false, bool settingsRole = false, bool streamRole = false, bool jukeboxRole = false,
@@ -161,6 +165,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="username">The name of the user to delete.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(3)]
         public bool DeleteUser(string username)
         {
             RestCommand command = new RestCommand();
@@ -175,6 +180,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="username">The name of the user which should change its password.</param>
         /// <param name="newPassword">The new password of the new user.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(1)]
         public bool ChangePassword(string username, string newPassword)
         {
             RestCommand command = new RestCommand();

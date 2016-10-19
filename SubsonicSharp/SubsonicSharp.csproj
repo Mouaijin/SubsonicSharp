@@ -45,6 +45,8 @@
     <Compile Include="ActionGroups\Search.cs" />
     <Compile Include="ActionGroups\Sharing.cs" />
     <Compile Include="ActionGroups\UserManagement.cs" />
+    <Compile Include="ApiLevel.cs" />
+    <Compile Include="ApiRequirementsCache.cs" />
     <Compile Include="BasicItem.cs" />
     <Compile Include="IStreamingAudio.cs" />
     <Compile Include="RestCommand.cs" />

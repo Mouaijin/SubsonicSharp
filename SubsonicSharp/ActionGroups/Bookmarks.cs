@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using SubsonicSharp.SubTypes;
@@ -19,8 +21,11 @@ namespace SubsonicSharp.ActionGroups
         /// Returns all bookmarks for this user. A bookmark is a position within a certain media file. 
         /// </summary>
         /// <returns>A collection of Bookmarks objects for all bookmarks in the system</returns>
+        [ApiLevel(9)]
         public IEnumerable<Bookmark> GetBookmarks()
         {
+            Type t = typeof(Bookmarks);
+            IEnumerable<MethodInfo> runtimeMethods = t.GetRuntimeMethods();
             RestCommand command = new RestCommand();
             command.MethodName = "getBookmarks";
             return Client.GetResponseXDocument(command).RealRoot().Elements().Select(Bookmark.Create);
@@ -32,6 +37,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="position">The position (in milliseconds) within the media file.</param>
         /// <param name="comment">A user-defined comment.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(9)]
         public bool CreateBookmark(int id, long position, string comment = null)
         {
             RestCommand command = new RestCommand();
@@ -46,6 +52,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="id">ID of the media file for which to delete the bookmark. Other users' bookmarks are not affected.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(9)]
         public bool DeleteBookmark(int id)
         {
             RestCommand command = new RestCommand();
@@ -58,6 +65,7 @@ namespace SubsonicSharp.ActionGroups
         /// Returns the state of the play queue for this user (as set by savePlayQueue). This includes the tracks in the play queue, the currently playing track, and the position within this track. Typically used to allow a user to move between different clients/apps while retaining the same play queue (for instance when listening to an audio book). 
         /// </summary>
         /// <returns>A PlayQueue object for the current play queue for the current user</returns>
+        [ApiLevel(12)]
         public PlayQueue GetPlayQueue()
         {
             RestCommand command = new RestCommand();
@@ -71,6 +79,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="currentId">The ID of the current playing song.</param>
         /// <param name="position">The position in milliseconds within the currently playing song.</param>
         /// <returns></returns>
+        [ApiLevel(12)]
         public bool SavePlayQueue(IEnumerable<int> ids, int currentId = -1, long position = -1)
         {
             RestCommand command = new RestCommand();
