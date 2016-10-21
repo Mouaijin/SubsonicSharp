@@ -20,6 +20,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="since">Only return messages newer than this time</param>
         /// <returns>A collection of ChatMessage objects</returns>
+        [ApiLevel(2)]
         public IEnumerable<ChatMessage> GetChatMessages(DateTime? since = null)
         {
             RestCommand command = new RestCommand();
@@ -32,6 +33,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="message">The chat message.</param>
         /// <returns>A bool indicating success ror failure</returns>
+        [ApiLevel(2)]
         public bool AddChatMessage(string message)
         {
             RestCommand command = new RestCommand();

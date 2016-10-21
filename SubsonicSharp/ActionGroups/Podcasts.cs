@@ -20,6 +20,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="includeEpisodes">Whether to include Podcast episodes in the returned result.</param>
         /// <returns>A collection of all PodcastChannel objects in system</returns>
+        [ApiLevel(6)]
         public IEnumerable<PodcastChannel> GetPodcasts(bool includeEpisodes = true)
         {
             RestCommand command = new RestCommand();
@@ -33,6 +34,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="id">Only return the Podcast channel with this ID.</param>
         /// <param name="includeEpisodes">Whether to include Podcast episodes in the returned result.</param>
         /// <returns>The requested PodcastChannel object</returns>
+        [ApiLevel(6)]
         public PodcastChannel GetPodcast(int id, bool includeEpisodes = true)
         {
             RestCommand command = new RestCommand();
@@ -46,6 +48,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="count">The maximum number of episodes to return.</param>
         /// <returns>A collection of the newest PodcastChannel objects</returns>
+        [ApiLevel(13)]
         public IEnumerable<PodcastChannel> GetNewestPodcasts(int count = 20)
         {
             RestCommand command = new RestCommand();
@@ -57,6 +60,7 @@ namespace SubsonicSharp.ActionGroups
         /// Requests the server to check for new Podcast episodes. Note: The user must be authorized for Podcast administration (see Settings &gt; Users &gt; User is allowed to administrate Podcasts). 
         /// </summary>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(9)]
         public bool RefreshPodcasts()
         {
             RestCommand command = new RestCommand();
@@ -68,6 +72,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="url">The URL of the Podcast to add.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(9)]
         public bool CreatePodcastChannel(string url)
         {
             RestCommand command = new RestCommand();
@@ -80,6 +85,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="id">The ID of the Podcast channel to delete.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(9)]
         public bool DeletePodcastChannel(int id)
         {
             RestCommand command = new RestCommand();
@@ -92,6 +98,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="id">The ID of the Podcast episode to delete.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(9)]
         public bool DeletePodcastEpisode(int id)
         {
             RestCommand command = new RestCommand();
@@ -104,6 +111,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="id">The ID of the Podcast episode to download.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(9)]
         public bool DownloadPodcastEpisode(int id)
         {
             RestCommand command = new RestCommand();

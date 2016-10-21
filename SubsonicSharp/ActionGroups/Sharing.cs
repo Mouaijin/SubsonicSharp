@@ -19,6 +19,7 @@ namespace SubsonicSharp.ActionGroups
         /// Returns information about shared media this user is allowed to manage. Takes no extra parameters. 
         /// </summary>
         /// <returns>A collection of Share objects for shares manageable by the current user</returns>
+        [ApiLevel(6)]
         public IEnumerable<Share> GetShares()
         {
             RestCommand command = new RestCommand {MethodName = "getShares"};
@@ -31,6 +32,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="description">A user-defined description that will be displayed to people visiting the shared media.</param>
         /// <param name="expires">The time at which the share expires.</param>
         /// <returns>A Share object for the created share</returns>
+        [ApiLevel(6)]
         public Share CreateShare(IEnumerable<int> ids, string description = null, DateTime? expires = null)
         {
             RestCommand command = new RestCommand();
@@ -52,6 +54,7 @@ namespace SubsonicSharp.ActionGroups
         /// <param name="description"> 	A user-defined description that will be displayed to people visiting the shared media.</param>
         /// <param name="expires">The time at which the share expires.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(6)]
         public bool UpdateShare(int id, string description = null, DateTime? expires = null)
         {
             RestCommand command = new RestCommand();
@@ -68,6 +71,7 @@ namespace SubsonicSharp.ActionGroups
         /// </summary>
         /// <param name="id">ID of the share to delete.</param>
         /// <returns>A bool indicating success or failure</returns>
+        [ApiLevel(6)]
         public bool DeleteShare(int id)
         {
             RestCommand command = new RestCommand();
