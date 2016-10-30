@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SubsonicSharp;
 using SubsonicSharp.SubTypes;
+using System.Net;
 
 namespace Tests
 {
@@ -12,7 +13,7 @@ namespace Tests
         public ConnectionTests()
         {
             UserToken user = new UserToken("test", "test", true);
-            ServerInfo server = new ServerInfo("192.168.1.140");
+            ServerInfo server = new ServerInfo("192.168.1.140", 4041, 13, "", ServerInfo.Protocol.Https);
             Client = new SubsonicClient(user, server);
         }
 
@@ -25,7 +26,7 @@ namespace Tests
         public void FormatPingCommand()
         {
             RestCommand pingCommand = new RestCommand {MethodName = "ping"};
-            string expected = "http://192.168.1.140:4040/rest/ping?u=test&p=test&v=1.13&c=SubSharp";
+            string expected = "https://192.168.1.140:4041/rest/ping?u=test&p=test&v=1.13&c=SubSharp";
             string actual = Client.FormatCommand(pingCommand);
             Assert.AreEqual(expected,actual);
         }
@@ -33,6 +34,7 @@ namespace Tests
         [TestMethod]
         public void PingTest()
         {
+            ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => true;
             bool response = Client.PingServer();
             Assert.AreEqual(true, response);
         }
