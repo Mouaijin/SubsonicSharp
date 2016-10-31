@@ -9,7 +9,7 @@ namespace Tests
     [TestClass]
     public class ConnectionTests
     {
-        private const string Username = "test";
+        private const string Username = "admin";
         private const string Password = "test";
         private const string Hostname = "192.168.1.39";
         private const string LicenseEmail = "midwan@gmail.com";
@@ -32,7 +32,7 @@ namespace Tests
         public void FormatPingCommand()
         {
             RestCommand pingCommand = new RestCommand {MethodName = "ping"};
-            string expected = $"http://192.168.1.39:4040/rest/ping?u={Username}&p={Password}&v=1.13&c=SubSharp";
+            string expected = $"http://{Hostname}:4040/rest/ping?u={Username}&p={Password}&v=1.13&c=SubSharp";
             string actual = Client.FormatCommand(pingCommand);
             Assert.AreEqual(expected,actual);
         }
