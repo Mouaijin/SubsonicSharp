@@ -17,6 +17,20 @@ Create a `SubsonicClient` object from the main package by passing in user and se
 This library currently supports passing the URL string needed to stream or download files, but does not pass the data itself.
 This may be addressed with platform-specific DI projects in the future (pull requests welcome), but due to the differences in how each platform handles media retrieval, this is a secondary goal.
 
+##SSL Support
+Because it is not possible to authenticate SSL certificates from a PCL at this time, to use this library with HTTPS, it is necessary to add some code to the consuming project. The easiest way to trust all certificates is to add the line:
+`ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => true;`
+
+
+This will modify the validation method for the entire application domain, so it is suggested that one of two actions is taken:
+
+1. Reset this callback to `null` after making a call to the API
+2. Set the callback to use a custom authentication method, rather than just returning true
+
+####Contributions to address this problem with a standard DI approach for specific platforms welcomed
+
+
+
 ##API Coverage Progress
 
 ###Complete
