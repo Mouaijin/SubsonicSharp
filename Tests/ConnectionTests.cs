@@ -1,19 +1,25 @@
 ﻿using System;
+using System.Net;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SubsonicSharp;
 using SubsonicSharp.SubTypes;
-using System.Net;
 
 namespace Tests
 {
     [TestClass]
     public class ConnectionTests
     {
+        private const string Username = "admin";
+        private const string Password = "test";
+        private const string Hostname = "192.168.1.39";
+        private const string LicenseEmail = "midwan@gmail.com";
+        private readonly DateTime _licenseDate = new DateTime(2017, 05, 24);
+
         public SubsonicClient Client { get; }
         public ConnectionTests()
         {
-            UserToken user = new UserToken("test", "test", true);
-            ServerInfo server = new ServerInfo("192.168.1.140", 4041, 13, "", ServerInfo.Protocol.Https);
+            UserToken user = new UserToken(Username, Password, true);
+            ServerInfo server = new ServerInfo(Hostname);
             Client = new SubsonicClient(user, server);
         }
 
@@ -26,7 +32,7 @@ namespace Tests
         public void FormatPingCommand()
         {
             RestCommand pingCommand = new RestCommand {MethodName = "ping"};
-            string expected = "https://192.168.1.140:4041/rest/ping?u=test&p=test&v=1.13&c=SubSharp";
+            string expected = $"http://{Hostname}:4040/rest/ping?u={Username}&p={Password}&v=1.13&c=SubSharp";
             string actual = Client.FormatCommand(pingCommand);
             Assert.AreEqual(expected,actual);
         }
@@ -34,20 +40,31 @@ namespace Tests
         [TestMethod]
         public void PingTest()
         {
+            // Trust all certificates (even self-signed ones)
             ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => true;
             bool response = Client.PingServer();
+            
             Assert.AreEqual(true, response);
+
+            // Reset callback to null for security reasons
+            ServicePointManager.ServerCertificateValidationCallback = null;
         }
 
         [TestMethod]
         public void LicenseTest()
         {
+            // Trust all certificates (even self-signed ones)
+            ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => true;
+
             License license = Client.GetLicense();
             Assert.AreEqual(true, license.Valid);
-            Assert.AreEqual("vypon3000@gmail.com", license.Email);
+            Assert.AreEqual(LicenseEmail, license.Email);
             //DateTime seems to be returned in UTC format- DateTime.Parse should be okay with this
-            DateTime expected = new DateTime(2017, 6, 14, 10, 5, 6, 578);
-            Assert.AreEqual(expected, license.Expires);
+            DateTime expected = _licenseDate;
+            Assert.AreEqual(expected.Date, license.Expires.Date);
+
+            // Reset callback to null for security reasons
+            ServicePointManager.ServerCertificateValidationCallback = null;
         }
     }
 }

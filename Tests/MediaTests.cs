@@ -4,6 +4,7 @@ using SubsonicSharp;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Net;
 using SubsonicSharp.SubTypes;
 
 namespace Tests
@@ -11,12 +12,16 @@ namespace Tests
     [TestClass]
     public class MediaTests
     {
+        private const string Username = "admin";
+        private const string Password = "test";
+        private const string Hostname = "192.168.1.39";
+
         public SubsonicClient Client { get; set; }
 
         public MediaTests()
         {
-            UserToken user = new UserToken("test", "test", true);
-            ServerInfo server = new ServerInfo("192.168.1.140");
+            UserToken user = new UserToken(Username, Password, true);
+            ServerInfo server = new ServerInfo(Hostname);
             Client = new SubsonicClient(user, server);
         }
 
@@ -25,7 +30,7 @@ namespace Tests
         {
             string actual = Client.MediaRetrieval.GetStreamingAddress(999, 0, "raw", true);
             string expected =
-                "http://192.168.1.140:4040/rest/stream?id=999&format=raw&estimateContentLength=True&u=test&p=test&v=1.13&c=SubSharp";
+                $"http://{Hostname}:4040/rest/stream?id=999&format=raw&estimateContentLength=True&u={Username}&p={Password}&v=1.13&c=SubSharp";
             Assert.AreEqual(expected, actual);
         }
 
@@ -33,7 +38,7 @@ namespace Tests
         public void GetDownloadUrlTest()
         {
             string actual = Client.MediaRetrieval.GetDownloadAddress(999);
-            string expected = "http://192.168.1.140:4040/rest/download?id=999&u=test&p=test&v=1.13&c=SubSharp";
+            string expected = $"http://{Hostname}:4040/rest/download?id=999&u={Username}&p={Password}&v=1.13&c=SubSharp";
             Assert.AreEqual(expected, actual);
         }
 
@@ -47,6 +52,9 @@ namespace Tests
         [TestMethod]
         public void GetLyricsTest()
         {
+            // Trust all certificates (even self-signed ones)
+            ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, errors) => true;
+
             string artist = "Muse";
             string title = "Hysteria";
             Lyrics actual = Client.MediaRetrieval.GetLyrics(artist, title);
@@ -55,6 +63,9 @@ namespace Tests
             Assert.AreEqual(artist, actual.Artist);
             Assert.AreEqual(title, actual.Title);
             Assert.IsTrue(actual.Text.StartsWith(expectedText));
+
+            // Reset callback to null for security reasons
+            ServicePointManager.ServerCertificateValidationCallback = null;
         }
     }
 }
