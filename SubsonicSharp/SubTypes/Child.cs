@@ -125,6 +125,9 @@ namespace SubsonicSharp.SubTypes
                     case "artistid":
                         child.ArtistId = Convert.ToInt32(attribute.Value);
                         break;
+                    case "title":
+                        child.Title = attribute.Value;
+                        break;
                     case "type":
                         child.MediaType = attribute.Value.ToMediaType();
                         break;
